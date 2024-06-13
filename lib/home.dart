@@ -1,38 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:west33/homePage.dart';
 import 'package:west33/menu.dart';
 import 'package:west33/widgets/menuCard.dart';
-
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        scaffoldBackgroundColor: Colors.black,
-        primaryColor: const Color(0xff8D7B4B),
-        textTheme: const TextTheme(
-          titleLarge: TextStyle(
-              color: Color(0xff8D7B4B),
-              fontSize: 12,
-              fontWeight: FontWeight.w700),
-          titleMedium: TextStyle(
-              color: Color(0xff8D7B4B),
-              fontSize: 12,
-              fontWeight: FontWeight.w400),
-        ),
-      ),
-      home: const HomePage(),
-    );
-  }
-}
+import 'package:west33/widgets/sliderAnimation.dart';
 
 class Home extends StatelessWidget {
   const Home({super.key});
@@ -53,12 +22,11 @@ class Home extends StatelessWidget {
           image: 'assets/images/mocktails.png',
           title: 'Mocktails',
           fun: () {
-            print('Hello 1');
-            Navigator.push(context, MaterialPageRoute(builder: (context) {
-              return Menu(
-                title: 'Mocktails',
-              );
-            }));
+            navigateToPage(
+                context,
+                Menu(
+                  title: 'Mocktails',
+                ));
           },
         ),
         MenuCard(

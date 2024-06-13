@@ -75,7 +75,33 @@ class CustomFloatingActionButtons extends StatelessWidget {
                     },
                   );
                 }),
-            label: 'Tooltip 2',
+            label: 'Ask for Bill',
+            labelStyle: const TextStyle(fontWeight: FontWeight.bold),
+          ),
+          SpeedDialChild(
+            child: const Icon(Icons.help_outline),
+            backgroundColor: Colors.green,
+            onTap: helpOnTap ??
+                (() {
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: const Text("Tooltip 2"),
+                        content: const Text("This is the second button."),
+                        actions: <Widget>[
+                          ElevatedButton(
+                            child: const Text("Close"),
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                }),
+            label: 'Cart',
             labelStyle: const TextStyle(fontWeight: FontWeight.bold),
           ),
         ],
