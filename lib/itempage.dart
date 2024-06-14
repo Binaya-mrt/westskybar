@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:west33/homePage.dart';
 import 'package:west33/mydialog.dart';
 
 class ItemPage extends StatefulWidget {
@@ -142,7 +143,32 @@ class _ItemPageState extends State<ItemPage> {
                                     showDialog(
                                       context: context,
                                       builder: (BuildContext context) =>
-                                          const Mydialog(),
+                                          Mydialog(
+                                        onTap: () {
+                                          Navigator.of(context)
+                                              .pushAndRemoveUntil(
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    const HomePage()),
+                                            (Route route) => route.isFirst,
+                                          );
+
+                                          // Show Snackbar after the navigation completes
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(
+                                            const SnackBar(
+                                              content: Text(
+                                                '✅ Order Added to cart successfully!',
+                                                style: TextStyle(
+                                                    color: Colors.green,
+                                                    fontSize: 18,
+                                                    fontWeight:
+                                                        FontWeight.w500),
+                                              ),
+                                            ),
+                                          );
+                                        },
+                                      ),
                                     );
                                   },
                                   style: ElevatedButton.styleFrom(

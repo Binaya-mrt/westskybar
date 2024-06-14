@@ -10,6 +10,19 @@ class Events extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+
+    // Calculate the number of columns based on screen width
+    int crossAxisCount;
+    if (screenWidth >= 1200) {
+      crossAxisCount = 6;
+    } else if (screenWidth >= 900) {
+      crossAxisCount = 4;
+    } else if (screenWidth >= 600) {
+      crossAxisCount = 3;
+    } else {
+      crossAxisCount = 2;
+    }
     return Scaffold(
       appBar: MyAppBar(okay: key10),
       drawer: const CustomDrawer(),
@@ -69,7 +82,8 @@ class Events extends StatelessWidget {
                   scrollDirection: Axis.horizontal,
                   children: [
                     Container(
-                      padding: const EdgeInsets.only(left: 8, bottom: 5, top: 5),
+                      padding:
+                          const EdgeInsets.only(left: 8, bottom: 5, top: 5),
                       margin: const EdgeInsets.only(right: 8),
                       width: MediaQuery.of(context).size.width * 0.8,
                       decoration: BoxDecoration(
@@ -125,7 +139,8 @@ class Events extends StatelessWidget {
                       ),
                     ),
                     Container(
-                      padding: const EdgeInsets.only(left: 8, bottom: 5, top: 5),
+                      padding:
+                          const EdgeInsets.only(left: 8, bottom: 5, top: 5),
                       margin: const EdgeInsets.only(right: 8),
                       width: MediaQuery.of(context).size.width * 0.8,
                       decoration: BoxDecoration(
@@ -198,8 +213,8 @@ class Events extends StatelessWidget {
               ),
               GridView(
                 shrinkWrap: true,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: crossAxisCount,
                     childAspectRatio: 3 / 5,
                     crossAxisSpacing: 8,
                     mainAxisSpacing: 5),

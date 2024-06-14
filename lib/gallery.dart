@@ -10,6 +10,19 @@ class Gallery extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+
+    // Calculate the number of columns based on screen width
+    int crossAxisCount;
+    if (screenWidth >= 1200) {
+      crossAxisCount = 6;
+    } else if (screenWidth >= 900) {
+      crossAxisCount = 4;
+    } else if (screenWidth >= 600) {
+      crossAxisCount = 3;
+    } else {
+      crossAxisCount = 2;
+    }
     return Scaffold(
       appBar: MyAppBar(okay: key10),
       drawer: const CustomDrawer(),
@@ -70,8 +83,8 @@ class Gallery extends StatelessWidget {
               ),
               GridView(
                 shrinkWrap: true,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: crossAxisCount,
                     childAspectRatio: 3 / 5,
                     crossAxisSpacing: 10,
                     mainAxisSpacing: 10),

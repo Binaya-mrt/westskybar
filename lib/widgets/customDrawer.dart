@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:west33/admin%20screens/admin_home.dart';
 import 'package:west33/booking1.dart';
 import 'package:west33/events.dart';
 import 'package:west33/gallery.dart';
 import 'package:west33/homePage.dart';
+import 'package:west33/waiter%20Screens/waiter_home.dart';
 
 // class CustomDrawer extends StatelessWidget {
 //   const CustomDrawer({
@@ -128,10 +130,10 @@ class _CustomDrawerState extends State<CustomDrawer>
   final List<String> _menuItems = [
     'MENU',
     'BOOK A TABLE',
-    'CART',
-    'ASK FOR THE BILLS',
     'GALLERY',
     'EVENTS',
+    'WAITER',
+    'ADMIN'
   ];
 
   @override
@@ -234,6 +236,16 @@ class _CustomDrawerState extends State<CustomDrawer>
               } else if (item == 'EVENTS') {
                 Navigator.of(context).pushAndRemoveUntil(
                   MaterialPageRoute(builder: (context) => Events()),
+                  (Route route) => route.isFirst,
+                );
+              } else if (item == 'WAITER') {
+                Navigator.of(context).pushAndRemoveUntil(
+                  MaterialPageRoute(builder: (context) => const WaiterHome()),
+                  (Route route) => route.isFirst,
+                );
+              } else if (item == 'ADMIN') {
+                Navigator.of(context).pushAndRemoveUntil(
+                  MaterialPageRoute(builder: (context) => const AdminHome()),
                   (Route route) => route.isFirst,
                 );
               } else {

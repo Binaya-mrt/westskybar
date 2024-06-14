@@ -166,12 +166,25 @@ final List<String> imagePaths = [
 class _TableIndoorState extends State<TableIndoor> {
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+
+    // Calculate the number of columns based on screen width
+    int crossAxisCount;
+    if (screenWidth >= 1200) {
+      crossAxisCount = 6;
+    } else if (screenWidth >= 900) {
+      crossAxisCount = 4;
+    } else if (screenWidth >= 600) {
+      crossAxisCount = 3;
+    } else {
+      crossAxisCount = 2;
+    }
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10),
       child: GridView.builder(
         shrinkWrap: true,
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: crossAxisCount,
           crossAxisSpacing: 20,
           mainAxisSpacing: 15,
         ),
