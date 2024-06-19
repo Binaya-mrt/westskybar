@@ -9,16 +9,11 @@ import 'package:west33/widgets/customDrawer.dart';
 import 'package:west33/widgets/menuCard.dart';
 import 'package:west33/widgets/sliderAnimation.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+class HomePage extends StatelessWidget {
+  HomePage({super.key});
 
-  @override
-  State<HomePage> createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  final GlobalKey<ScaffoldState> _key = GlobalKey(); // Create a key
-
+  final GlobalKey<ScaffoldState> _key = GlobalKey();
+  // Create a key
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(

@@ -20,8 +20,8 @@ class MyHttpoverrides extends HttpOverrides {
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  HttpOverrides.global = new MyHttpoverrides();
-  runApp(MyApp());
+  HttpOverrides.global = MyHttpoverrides();
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -50,7 +50,7 @@ class MyApp extends StatelessWidget {
                 fontWeight: FontWeight.w400),
           ),
         ),
-        home: const HomePage(),
+        home: HomePage(),
       ),
     );
   }
@@ -77,7 +77,7 @@ class Home extends StatelessWidget {
       crossAxisCount = 2;
     }
     return menuController.menuItems == null
-        ? Center(child: Text('No menu available'))
+        ? const Center(child: Text('No menu available'))
         : GridView.builder(
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: crossAxisCount,

@@ -149,7 +149,7 @@ class _ItemPageState extends State<ItemPage> {
                                               .pushAndRemoveUntil(
                                             MaterialPageRoute(
                                                 builder: (context) =>
-                                                    const HomePage()),
+                                                    HomePage()),
                                             (Route route) => route.isFirst,
                                           );
 

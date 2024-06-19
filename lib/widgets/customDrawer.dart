@@ -113,7 +113,7 @@ class _CustomDrawerState extends State<CustomDrawer>
               // Define the navigation based on the item
               if (item == 'MENU') {
                 Navigator.of(context).pushAndRemoveUntil(
-                  MaterialPageRoute(builder: (context) => const HomePage()),
+                  MaterialPageRoute(builder: (context) => HomePage()),
                   (Route route) => route.isFirst,
                 );
               } else if (item == 'BOOK A TABLE') {

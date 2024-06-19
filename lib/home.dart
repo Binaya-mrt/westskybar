@@ -26,7 +26,7 @@ class Home extends StatelessWidget {
     }
 
     return menuController.menuItems == null
-        ? Center(child: Text('No menu available'))
+        ? const Center(child: Text('No menu available'))
         : GridView.builder(
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: crossAxisCount,
