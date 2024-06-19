@@ -1,11 +1,27 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:west33/admin%20screens/controller/menuController.dart';
+import 'package:west33/appbar.dart';
 import 'package:west33/homePage.dart';
 import 'package:west33/menu.dart';
 import 'package:west33/widgets/menuCard.dart';
+import 'package:west33/widgets/sliderAnimation.dart';
+
+class MyHttpoverrides extends HttpOverrides {
+  @override
+  HttpClient createHttpClient(SecurityContext? context) {
+    return super.createHttpClient(context)
+      ..badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
+  }
+}
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(const MyApp());
+  HttpOverrides.global = new MyHttpoverrides();
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -13,23 +29,29 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        scaffoldBackgroundColor: Colors.black,
-        primaryColor: const Color(0xff8D7B4B),
-        textTheme: const TextTheme(
-          titleLarge: TextStyle(
-              color: Color(0xff8D7B4B),
-              fontSize: 12,
-              fontWeight: FontWeight.w700),
-          titleMedium: TextStyle(
-              color: Color(0xff8D7B4B),
-              fontSize: 12,
-              fontWeight: FontWeight.w400),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => MenuProvider()),
+        // ChangeNotifierProvider(create: (context) => UserController()),
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          scaffoldBackgroundColor: Colors.black,
+          primaryColor: const Color(0xff8D7B4B),
+          textTheme: const TextTheme(
+            titleLarge: TextStyle(
+                color: Color(0xff8D7B4B),
+                fontSize: 12,
+                fontWeight: FontWeight.w700),
+            titleMedium: TextStyle(
+                color: Color(0xff8D7B4B),
+                fontSize: 12,
+                fontWeight: FontWeight.w400),
+          ),
         ),
+        home: const HomePage(),
       ),
-      home: const HomePage(),
     );
   }
 }
@@ -39,9 +61,11 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    const URL = "http://localhost:3000";
+    final menuController = Provider.of<MenuProvider>(context);
     final screenWidth = MediaQuery.of(context).size.width;
+    menuController.fetchMenuItems();
 
-    // Calculate the number of columns based on screen width
     int crossAxisCount;
     if (screenWidth >= 1200) {
       crossAxisCount = 6;
@@ -52,47 +76,31 @@ class Home extends StatelessWidget {
     } else {
       crossAxisCount = 2;
     }
-    return GridView(
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: crossAxisCount,
-          crossAxisSpacing: 10,
-          mainAxisSpacing: 10,
-          childAspectRatio: 3 / 6),
-      shrinkWrap: true,
-      // physics: NeverScrollableScrollPhysics(),
-      children: [
-        MenuCard(
-          desc: 'Elyx Vodka, Ginger, Mint, Lemon & Fever-Tree Soda',
-          image: 'assets/images/mocktails.png',
-          title: 'Mocktails',
-          fun: () {
-            print('Hello 1');
-            Navigator.push(context, MaterialPageRoute(builder: (context) {
-              return Menu(
-                title: 'Mocktails',
+    return menuController.menuItems == null
+        ? Center(child: Text('No menu available'))
+        : GridView.builder(
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: crossAxisCount,
+                crossAxisSpacing: 10,
+                mainAxisSpacing: 10,
+                childAspectRatio: 3 / 6),
+            shrinkWrap: true,
+            itemCount:
+                menuController.menuItems!.length, // total number of items
+            itemBuilder: (context, index) {
+              var item = menuController.menuItems![index];
+              return MenuCard(
+                desc: item.detail,
+                image: URL + item.image,
+                title: item.name,
+                fun: () {
+                  navigateToPage(
+                      context,
+                      Menu(
+                        title: 'Mocktails',
+                      ));
+                },
               );
-            }));
-          },
-        ),
-        MenuCard(
-          desc: 'Elyx Vodka, Ginger, Mint, Lemon & Fever-Tree Soda',
-          image: 'assets/images/gin.png',
-          title: 'gin',
-          fun: () {},
-        ),
-        MenuCard(
-          desc: 'Elyx Vodka, Ginger, Mint, Lemon & Fever-Tree Soda',
-          image: 'assets/images/wine.png',
-          title: 'Wine',
-          fun: () {},
-        ),
-        MenuCard(
-          desc: 'Elyx Vodka, Ginger, Mint, Lemon & Fever-Tree Soda',
-          image: 'assets/images/mocktails.png',
-          title: 'Mocktails',
-          fun: () {},
-        ),
-      ],
-    );
+            });
   }
 }

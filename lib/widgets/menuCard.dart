@@ -26,7 +26,7 @@ class MenuCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
-            Image.asset(
+            Image.network(
               image,
               fit: BoxFit.cover,
             ),

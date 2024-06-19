@@ -72,12 +72,15 @@ class OrderStatus extends StatelessWidget {
                             fontSize: 18,
                             fontWeight: FontWeight.w500),
                       ),
-                      trailing: SizedBox(
-                        height: 50,
-                        width: 50,
-                        child: const Text(
-                          'x5',
-                          style: TextStyle(color: Colors.white, fontSize: 12),
+                      trailing: Container(
+                        color: Color(0xff292929),
+                        height: 35,
+                        width: 40,
+                        child: Center(
+                          child: const Text(
+                            'x5',
+                            style: TextStyle(color: Colors.white, fontSize: 12),
+                          ),
                         ),
                       )),
                   const Divider(
@@ -98,11 +101,15 @@ class OrderStatus extends StatelessWidget {
                             fontSize: 18,
                             fontWeight: FontWeight.w500),
                       ),
-                      trailing: SizedBox(
-                        width: 50,
-                        child: const Text(
-                          'x5',
-                          style: TextStyle(color: Colors.white, fontSize: 12),
+                      trailing: Container(
+                        color: Color(0xff292929),
+                        height: 40,
+                        width: 35,
+                        child: Center(
+                          child: const Text(
+                            'x5',
+                            style: TextStyle(color: Colors.white, fontSize: 12),
+                          ),
                         ),
                       )),
                   const Divider(
