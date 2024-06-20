@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:west33/admin%20screens/order_status.dart';
+import 'package:west33/admin%20screens/ADMINVIEWS/order_status.dart';
 import 'package:west33/widgets/sliderAnimation.dart';
 
 class TableOverview extends StatelessWidget {
   const TableOverview({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
 
-    const textStyle_head = TextStyle(
+    const textstyleHead = TextStyle(
         fontWeight: FontWeight.w400, fontSize: 14, color: Colors.white);
     return Scaffold(
       appBar: AppBar(
@@ -46,10 +46,10 @@ class TableOverview extends StatelessWidget {
             ),
             Table_no(
               height: height,
-              textStyle_head: textStyle_head,
+              textStyle_head: textstyleHead,
               number: '1',
             ),
-            Divider(),
+            const Divider(),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
@@ -58,7 +58,7 @@ class TableOverview extends StatelessWidget {
                   decoration: BoxDecoration(
                       color: Colors.green,
                       borderRadius: BorderRadius.circular(4)),
-                  child: Row(
+                  child: const Row(
                     children: [
                       Icon(
                         Icons.people,
@@ -76,7 +76,7 @@ class TableOverview extends StatelessWidget {
                   decoration: BoxDecoration(
                       color: Colors.red,
                       borderRadius: BorderRadius.circular(4)),
-                  child: Row(
+                  child: const Row(
                     children: [
                       Icon(
                         Icons.people,
@@ -90,13 +90,13 @@ class TableOverview extends StatelessWidget {
                   ),
                 ),
                 GestureDetector(
-                  onTap: () => navigateToPage(context, OrderStatus()),
+                  onTap: () => navigateToPage(context, const OrderStatus()),
                   child: Container(
                     height: 23,
                     decoration: BoxDecoration(
                         color: Colors.grey,
                         borderRadius: BorderRadius.circular(4)),
-                    child: Row(
+                    child: const Row(
                       children: [
                         Icon(
                           Icons.people,
@@ -114,10 +114,10 @@ class TableOverview extends StatelessWidget {
             ),
             Table_no(
               height: height,
-              textStyle_head: textStyle_head,
+              textStyle_head: textstyleHead,
               number: '2',
             ),
-            Divider(),
+            const Divider(),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
@@ -126,7 +126,7 @@ class TableOverview extends StatelessWidget {
                   decoration: BoxDecoration(
                       color: Colors.green,
                       borderRadius: BorderRadius.circular(4)),
-                  child: Row(
+                  child: const Row(
                     children: [
                       Icon(
                         Icons.people,
@@ -144,7 +144,7 @@ class TableOverview extends StatelessWidget {
                   decoration: BoxDecoration(
                       color: Colors.red,
                       borderRadius: BorderRadius.circular(4)),
-                  child: Row(
+                  child: const Row(
                     children: [
                       Icon(
                         Icons.people,
@@ -162,7 +162,7 @@ class TableOverview extends StatelessWidget {
                   decoration: BoxDecoration(
                       color: Colors.grey,
                       borderRadius: BorderRadius.circular(4)),
-                  child: Row(
+                  child: const Row(
                     children: [
                       Icon(
                         Icons.people,
@@ -179,10 +179,10 @@ class TableOverview extends StatelessWidget {
             ),
             Table_no(
               height: height,
-              textStyle_head: textStyle_head,
+              textStyle_head: textstyleHead,
               number: '3',
             ),
-            Divider(),
+            const Divider(),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
@@ -191,7 +191,7 @@ class TableOverview extends StatelessWidget {
                   decoration: BoxDecoration(
                       color: Colors.green,
                       borderRadius: BorderRadius.circular(4)),
-                  child: Row(
+                  child: const Row(
                     children: [
                       Icon(
                         Icons.people,
@@ -209,7 +209,7 @@ class TableOverview extends StatelessWidget {
                   decoration: BoxDecoration(
                       color: Colors.red,
                       borderRadius: BorderRadius.circular(4)),
-                  child: Row(
+                  child: const Row(
                     children: [
                       Icon(
                         Icons.people,
@@ -227,7 +227,7 @@ class TableOverview extends StatelessWidget {
                   decoration: BoxDecoration(
                       color: Colors.grey,
                       borderRadius: BorderRadius.circular(4)),
-                  child: Row(
+                  child: const Row(
                     children: [
                       Icon(
                         Icons.people,
@@ -267,7 +267,7 @@ class Table_no extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(
+          const Icon(
             Icons.rocket,
             color: Colors.white,
           ),
@@ -302,7 +302,7 @@ class Various_status extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
         child: Container(
-      margin: EdgeInsets.only(left: 05),
+      margin: const EdgeInsets.only(left: 05),
       height: height * 0.05,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(4),

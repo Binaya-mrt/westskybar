@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:west33/appbar.dart';
-import 'package:west33/floatingButton.dart';
-import 'package:west33/itempage.dart';
+import 'package:west33/widgets/floatingButton.dart';
+import 'package:west33/USER%20SCREENS/itempage.dart';
 import 'package:west33/widgets/customDrawer.dart';
 import 'package:west33/widgets/menuCard.dart';
 import 'package:west33/widgets/sliderAnimation.dart';

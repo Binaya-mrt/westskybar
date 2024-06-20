@@ -1,19 +1,22 @@
+// THIS PAGE IS THE ALL CATEGORY PAGE
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:west33/USER%20SCREENS/menu.dart';
 import 'package:west33/admin%20screens/controller/menuController.dart';
-import 'package:west33/menu.dart';
 import 'package:west33/widgets/menuCard.dart';
 import 'package:west33/widgets/sliderAnimation.dart';
 
 class Home extends StatelessWidget {
-  Home({super.key});
+  const Home({super.key});
 
   @override
   Widget build(BuildContext context) {
+    const URL = "http://localhost:3000";
     final menuController = Provider.of<MenuProvider>(context);
     final screenWidth = MediaQuery.of(context).size.width;
+    menuController.fetchMenuItems();
 
-    // Calculate the number of columns based on screen width
     int crossAxisCount;
     if (screenWidth >= 1200) {
       crossAxisCount = 6;
@@ -24,7 +27,6 @@ class Home extends StatelessWidget {
     } else {
       crossAxisCount = 2;
     }
-
     return menuController.menuItems == null
         ? const Center(child: Text('No menu available'))
         : GridView.builder(
@@ -40,7 +42,7 @@ class Home extends StatelessWidget {
               var item = menuController.menuItems![index];
               return MenuCard(
                 desc: item.detail,
-                image: 'assets/images/mocktails.png',
+                image: URL + item.image,
                 title: item.name,
                 fun: () {
                   navigateToPage(
@@ -50,9 +52,6 @@ class Home extends StatelessWidget {
                       ));
                 },
               );
-            }
-            // physics: NeverScrollableScrollPhysics(),
-
-            );
+            });
   }
 }

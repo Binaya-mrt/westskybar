@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:west33/appbar.dart';
-import 'package:west33/booking2.dart';
+import 'package:west33/BOOKING/booking2.dart';
 import 'package:west33/widgets/customDrawer.dart';
+import 'package:west33/widgets/datepicker.dart';
+import 'package:west33/widgets/timepicker.dart';
+
+// THIS IS THE FIRST PAGE OF BOOKING PAGE
+// THIS PROVIDES USER INTERFACE TO ENTER NUMBER OF GUEST, TIME AND DATE
 
 class Book extends StatelessWidget {
   Book({super.key});
@@ -193,140 +198,6 @@ class _FilterChipDisplayState extends State<FilterChipDisplay> {
           ),
         );
       }).toList(),
-    );
-  }
-}
-
-class date extends StatefulWidget {
-  const date({
-    super.key,
-  });
-
-  @override
-  State<date> createState() => _dateState();
-}
-
-class _dateState extends State<date> {
-  DateTime selectedDate = DateTime.now();
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(0, 12, 0, 12),
-      child: Container(
-        width: double.infinity,
-        // height: 109,
-        decoration: const BoxDecoration(
-            // borderRadius: BorderRadius.circular(8),
-            color: Color(0xff292929)),
-        child: Padding(
-          padding: const EdgeInsets.all(14.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              GestureDetector(
-                onTap: () async {
-                  final DateTime? dateTime = await showDatePicker(
-                    context: context,
-                    firstDate: DateTime.now(),
-                    lastDate: DateTime(3000),
-                    initialDate: selectedDate,
-                  );
-                  if (dateTime != null) {
-                    setState(() {
-                      selectedDate = dateTime;
-                    });
-                  }
-                },
-                child: Row(
-                  children: [
-                    const Icon(
-                      Icons.calendar_month,
-                      color: Colors.white,
-                      size: 21,
-                    ),
-                    const SizedBox(
-                      width: 20,
-                    ),
-                    Text(
-                      "${selectedDate.year} - ${selectedDate.month} - ${selectedDate.day}",
-                      style: const TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w500,
-                          fontSize: 14),
-                    ),
-                  ],
-                ),
-              )
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class TimePickerExample extends StatefulWidget {
-  const TimePickerExample({super.key});
-
-  @override
-  State<TimePickerExample> createState() => _TimePickerExampleState();
-}
-
-class _TimePickerExampleState extends State<TimePickerExample> {
-  DateTime selectedTime = DateTime.now();
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(0, 12, 0, 12),
-      child: Container(
-        width: double.infinity,
-        decoration: const BoxDecoration(color: Color(0xff292929)),
-        child: Padding(
-          padding: const EdgeInsets.all(14.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              GestureDetector(
-                onTap: () async {
-                  final TimeOfDay? pickedTime = await showTimePicker(
-                    context: context,
-                    initialTime: TimeOfDay.fromDateTime(selectedTime),
-                  );
-
-                  if (pickedTime != null) {
-                    setState(() {
-                      selectedTime = DateTime(
-                          selectedTime.year,
-                          selectedTime.month,
-                          selectedTime.day,
-                          pickedTime.hour,
-                          pickedTime.minute);
-                    });
-                  }
-                },
-                child: Row(
-                  children: [
-                    const Icon(
-                      Icons.access_time_rounded,
-                      color: Colors.white,
-                      size: 21,
-                    ),
-                    const SizedBox(width: 20),
-                    Text(
-                      "${selectedTime.hour}:${selectedTime.minute.toString().padLeft(2, '0')}",
-                      style: const TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w500,
-                          fontSize: 14),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
     );
   }
 }

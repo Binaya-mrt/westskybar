@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:west33/homePage.dart';
-import 'package:west33/mydialog.dart';
+import 'package:west33/USER%20SCREENS/homePage.dart';
+import 'package:west33/widgets/mydialog.dart';
+
+// THIS IS THE PRODUCT DETAIL PAGE
 
 class ItemPage extends StatefulWidget {
   const ItemPage({super.key});
@@ -62,7 +64,6 @@ class _ItemPageState extends State<ItemPage> {
               ],
             ),
 
-// ijinin ni mk
             DraggableScrollableSheet(
               initialChildSize: 0.08,
               minChildSize: 0.05,
@@ -198,8 +199,6 @@ class _ItemPageState extends State<ItemPage> {
                 );
               },
             )
-
-            // DraggableScrollableSheet
           ],
         ),
       ),

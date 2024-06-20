@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:west33/appbar.dart';
-import 'package:west33/homePage.dart';
+import 'package:west33/USER%20SCREENS/homePage.dart';
 import 'package:west33/widgets/customDrawer.dart';
+
+// THIS IS THE LAST PAGE OF BOOKING FLOW
+// THIS SHOWS THE DETAILS USER HAVE ENTERED DURING BOOKING AND CAN CONFIRM
+
+// TODO: EDIT THE DETIALS, CANCEL BOOKING.
 
 class Confirmtable extends StatelessWidget {
   Confirmtable({super.key});
   final GlobalKey<ScaffoldState> _key9 = GlobalKey(); // Create a key
-  // height =MediaQuery.of(context).size.height * 0.7;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

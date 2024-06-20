@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:west33/admin%20screens/admin_home.dart';
-import 'package:west33/booking1.dart';
-import 'package:west33/events.dart';
-import 'package:west33/gallery.dart';
-import 'package:west33/homePage.dart';
+import 'package:west33/admin%20screens/ADMINVIEWS/admin_home.dart';
+import 'package:west33/BOOKING/booking1.dart';
+import 'package:west33/EVENTS%20AND%20GALLERY/events.dart';
+import 'package:west33/EVENTS%20AND%20GALLERY/gallery.dart';
+import 'package:west33/USER%20SCREENS/homePage.dart';
 import 'package:west33/waiter%20Screens/waiter_home.dart';
 
 class CustomDrawer extends StatefulWidget {

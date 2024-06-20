@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:west33/booking2.dart';
+import 'package:west33/BOOKING/booking2.dart';
 import 'package:west33/waiter%20Screens/table_screen.dart';
 import 'package:west33/widgets/sliderAnimation.dart';
 
+/// THIS IS THE SCREEN WHERE WAITER SELECTS THE TABLE TO TAKE ORDER OF.
+/// ON CLICKING IT WILL NAVIGATE TO SIMPLE MENU PAGE, WHERE HE CAN SELCTS THE ORDER.
 class WaiterHome extends StatelessWidget {
   const WaiterHome({super.key});
 

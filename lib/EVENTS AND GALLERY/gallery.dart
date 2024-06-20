@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:west33/appbar.dart';
-import 'package:west33/floatingButton.dart';
+import 'package:west33/widgets/floatingButton.dart';
 import 'package:west33/widgets/customDrawer.dart';
 
-class Events extends StatelessWidget {
-  Events({super.key});
+// THIS IS THE GALLERY PAGE
+
+class Gallery extends StatelessWidget {
+  Gallery({super.key});
 
   final GlobalKey<ScaffoldState> key10 = GlobalKey(); // Create a key
 
@@ -36,7 +38,6 @@ class Events extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 14.0),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -49,7 +50,7 @@ class Events extends StatelessWidget {
                           children: [
                             Icon(Icons.arrow_back_ios, color: Colors.white),
                             Text(
-                              'Events',
+                              'GALLERY',
                               style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 20,
@@ -60,164 +61,35 @@ class Events extends StatelessWidget {
                       ),
                     ],
                   ),
+                  CircleAvatar(
+                    radius: 20,
+                    backgroundColor: Theme.of(context).primaryColor,
+                    child: IconButton(
+                        onPressed: () async {
+                          final DateTime? dateTime = await showDatePicker(
+                            context: context,
+                            firstDate: DateTime.now(),
+                            lastDate: DateTime(3000),
+                            initialDate: DateTime.now(),
+                          );
+                          if (dateTime != null) {
+                            print(dateTime);
+                          }
+                        },
+                        icon: const Icon(
+                          Icons.calendar_month_outlined,
+                          color: Colors.white,
+                        )),
+                  )
                 ],
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              const Text(
-                "UPCOMING EVENTS",
-                style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.w700,
-                    color: Colors.white),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              SizedBox(
-                height: 140,
-                child: ListView(
-                  shrinkWrap: true,
-                  scrollDirection: Axis.horizontal,
-                  children: [
-                    Container(
-                      padding:
-                          const EdgeInsets.only(left: 8, bottom: 5, top: 5),
-                      margin: const EdgeInsets.only(right: 8),
-                      width: MediaQuery.of(context).size.width * 0.8,
-                      decoration: BoxDecoration(
-                        border: Border.all(color: Colors.grey),
-                        image: const DecorationImage(
-                          image: AssetImage(
-                            'assets/images/event.png',
-                          ),
-                          fit: BoxFit.contain,
-                        ),
-                      ),
-                      child: const Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Column(
-                            children: [
-                              Text(
-                                'XYZ BAND',
-                                style: TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w700,
-                                    color: Colors.white),
-                              ),
-                              Text(
-                                'Now in Nepal',
-                                style: TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w500,
-                                    color: Colors.white),
-                              ),
-                            ],
-                          ),
-                          Column(
-                            children: [
-                              Text(
-                                '17th Jun,2024',
-                                style: TextStyle(
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w500,
-                                    color: Colors.white),
-                              ),
-                              Text(
-                                'Time: 5:00 p.m.',
-                                style: TextStyle(
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w500,
-                                    color: Colors.white),
-                              ),
-                            ],
-                          )
-                        ],
-                      ),
-                    ),
-                    Container(
-                      padding:
-                          const EdgeInsets.only(left: 8, bottom: 5, top: 5),
-                      margin: const EdgeInsets.only(right: 8),
-                      width: MediaQuery.of(context).size.width * 0.8,
-                      decoration: BoxDecoration(
-                        border: Border.all(color: Colors.grey),
-                        image: const DecorationImage(
-                          image: AssetImage(
-                            'assets/images/event.png',
-                          ),
-                          fit: BoxFit.contain,
-                        ),
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Column(
-                            children: [
-                              Text(
-                                'XYZ BAND',
-                                style: TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w700,
-                                    color: Colors.white),
-                              ),
-                              Text(
-                                'Now in Nepal',
-                                style: TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w500,
-                                    color: Colors.white),
-                              ),
-                            ],
-                          ),
-                          Column(
-                            children: [
-                              Text(
-                                '17th Jun,2024',
-                                style: TextStyle(
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w500,
-                                    color: Colors.white.withOpacity(0.8)),
-                              ),
-                              Text(
-                                'Time: 5:00 p.m.',
-                                style: TextStyle(
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w500,
-                                    color: Colors.white.withOpacity(0.8)),
-                              ),
-                            ],
-                          )
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(
-                height: 14,
-              ),
-              const Text(
-                "PREVIOUS EVENTS",
-                style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.w700,
-                    color: Colors.white),
-              ),
-              const SizedBox(
-                height: 10,
               ),
               GridView(
                 shrinkWrap: true,
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: crossAxisCount,
                     childAspectRatio: 3 / 5,
-                    crossAxisSpacing: 8,
-                    mainAxisSpacing: 5),
+                    crossAxisSpacing: 10,
+                    mainAxisSpacing: 10),
                 children: [
                   Container(
                     color: Colors.black,

@@ -17,10 +17,10 @@ class OrderStatus extends StatelessWidget {
           children: [
             GestureDetector(
               onTap: () => Navigator.pop(context),
-              child: Row(
+              child: const Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Row(
+                  Row(
                     children: [
                       Icon(Icons.arrow_back_ios, color: Colors.white),
                       Text(
@@ -35,7 +35,7 @@ class OrderStatus extends StatelessWidget {
                 ],
               ),
             ),
-            Center(
+            const Center(
               child: Text(
                 'Table 1',
                 style: TextStyle(
@@ -73,11 +73,11 @@ class OrderStatus extends StatelessWidget {
                             fontWeight: FontWeight.w500),
                       ),
                       trailing: Container(
-                        color: Color(0xff292929),
+                        color: const Color(0xff292929),
                         height: 35,
                         width: 40,
-                        child: Center(
-                          child: const Text(
+                        child: const Center(
+                          child: Text(
                             'x5',
                             style: TextStyle(color: Colors.white, fontSize: 12),
                           ),
@@ -102,11 +102,11 @@ class OrderStatus extends StatelessWidget {
                             fontWeight: FontWeight.w500),
                       ),
                       trailing: Container(
-                        color: Color(0xff292929),
+                        color: const Color(0xff292929),
                         height: 40,
                         width: 35,
-                        child: Center(
-                          child: const Text(
+                        child: const Center(
+                          child: Text(
                             'x5',
                             style: TextStyle(color: Colors.white, fontSize: 12),
                           ),

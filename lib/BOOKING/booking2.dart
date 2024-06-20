@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:west33/appbar.dart';
-import 'package:west33/confirmtable.dart';
+import 'package:west33/BOOKING/confirmtable.dart';
 import 'package:west33/widgets/customDrawer.dart';
+
+// THIS IS THE FIRST PAGE OF BOOKING PAGE
+// THIS PROVIDES USER INTERFACE TO SELECT THE TABLE  AND TABBAR TO
+// DIFFERENT LOCATION OF TABLE
 
 class BookingTable extends StatelessWidget {
   BookingTable({super.key});

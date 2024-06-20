@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:west33/mydialog.dart';
+import 'package:west33/widgets/mydialog.dart';
 import 'package:west33/waiter%20Screens/order_summary.dart';
 
+///
+/// ON CLICKING IT WILL NAVIGATE TO SIMPLE MENU PAGE, WHERE HE CAN SELCTS THE ORDER.
 class TableOrder extends StatelessWidget {
   const TableOrder({super.key});
 
@@ -121,6 +123,9 @@ class TableOrder extends StatelessWidget {
     );
   }
 }
+
+// IT IS THE TABS LIKE USER IN HOME. FOR ALL, FOOD DRINNKS IT WILL HAVE DIFFERENT TABS.
+//  THIS WILL NAVIGATE TO
 
 class WaiterMenu extends StatelessWidget {
   const WaiterMenu({super.key});

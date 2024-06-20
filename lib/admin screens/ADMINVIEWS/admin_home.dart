@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:west33/admin%20screens/add_event.dart';
-import 'package:west33/admin%20screens/add_menu.dart';
-import 'package:west33/admin%20screens/tableoverview.dart';
+import 'package:west33/admin%20screens/ADMINVIEWS/add_event.dart';
+import 'package:west33/admin%20screens/ADMINVIEWS/add_menu.dart';
+import 'package:west33/admin%20screens/ADMINVIEWS/tableoverview.dart';
 import 'package:west33/widgets/sliderAnimation.dart';
 
 class AdminHome extends StatelessWidget {
@@ -116,7 +116,7 @@ class AdminHome extends StatelessWidget {
                   color: Color(0xffBDB1B1),
                 ),
                 GestureDetector(
-                  onTap: () => navigateToPage(context, TableOverview()),
+                  onTap: () => navigateToPage(context, const TableOverview()),
                   child: ListTile(
                     title: const Text(
                       'Table Overview',
