@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:west33/admin%20screens/controller/eventController.dart';
 import 'package:west33/admin%20screens/controller/menuController.dart';
 
 import 'package:west33/USER%20SCREENS/homePage.dart';
@@ -19,7 +20,7 @@ class MyHttpoverrides extends HttpOverrides {
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   HttpOverrides.global = MyHttpoverrides();
-  GlobalErrorHandler().init();
+  // GlobalErrorHandler().init();
   runApp(MyApp());
 }
 
@@ -33,10 +34,12 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => MenuProvider()),
+        ChangeNotifierProvider(create: (context) => EventProvider()),
+
         // ChangeNotifierProvider(create: (context) => UserController()),
       ],
       child: MaterialApp(
-        scaffoldMessengerKey: GlobalErrorHandler.scaffoldMessengerKey,
+        // scaffoldMessengerKey: GlobalErrorHandler.scaffoldMessengerKey,
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           scaffoldBackgroundColor: Colors.black,

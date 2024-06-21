@@ -26,7 +26,8 @@ class ApiService {
         throw const HttpException('Failed to load menu items');
       }
     } catch (e) {
-      GlobalErrorHandler().showError(e.toString());
+      // GlobalErrorHandler().showError(e.toString());
+      print(e.toString());
       rethrow; // Ensure the error is rethrown so it can be caught and handled elsewhere if needed
     }
   }
