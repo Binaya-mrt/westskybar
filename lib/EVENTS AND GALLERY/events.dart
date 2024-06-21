@@ -97,11 +97,12 @@ class Events extends StatelessWidget {
                 child: ListView.builder(
                   shrinkWrap: true,
                   scrollDirection: Axis.horizontal,
-                  itemCount: eventController.allEvents!.length,
+                  itemCount: eventController.upcomingEvents!.length,
                   itemBuilder: (context, index) {
-                    final event = eventController.allEvents![index];
-                    return eventController.allEvents!.length == null
-                        ? const Center(child: Text('No menu available'))
+                    final event = eventController.upcomingEvents![index];
+
+                    return eventController.allEvents!.length == 0
+                        ? const Center(child: Text('No upcomming available'))
                         : Container(
                             padding: const EdgeInsets.only(
                                 left: 8, bottom: 5, top: 5),
@@ -175,143 +176,35 @@ class Events extends StatelessWidget {
               const SizedBox(
                 height: 10,
               ),
-              GridView(
+              GridView.builder(
                 shrinkWrap: true,
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: crossAxisCount,
                     childAspectRatio: 3 / 5,
                     crossAxisSpacing: 8,
                     mainAxisSpacing: 5),
-                children: [
-                  Container(
-                    color: Colors.black,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Image.asset('assets/images/gallery.jpg'),
-                        const SizedBox(
-                          height: 8,
-                        ),
-                        Text(
-                          '20th June, 2024',
-                          style: Theme.of(context).textTheme.titleMedium,
-                        ),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    color: Colors.black,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Image.asset('assets/images/gallery.jpg'),
-                        const SizedBox(
-                          height: 8,
-                        ),
-                        Text(
-                          '20th June, 2024',
-                          style: Theme.of(context).textTheme.titleMedium,
-                        ),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    color: Colors.black,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Image.asset('assets/images/gallery.jpg'),
-                        const SizedBox(
-                          height: 8,
-                        ),
-                        Text(
-                          '20th June, 2024',
-                          style: Theme.of(context).textTheme.titleMedium,
-                        ),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    color: Colors.black,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Image.asset('assets/images/gallery.jpg'),
-                        const SizedBox(
-                          height: 8,
-                        ),
-                        Text(
-                          '20th June, 2024',
-                          style: Theme.of(context).textTheme.titleMedium,
-                        ),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    color: Colors.black,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Image.asset('assets/images/gallery.jpg'),
-                        const SizedBox(
-                          height: 8,
-                        ),
-                        Text(
-                          '20th June, 2024',
-                          style: Theme.of(context).textTheme.titleMedium,
-                        ),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    color: Colors.black,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Image.asset('assets/images/gallery.jpg'),
-                        const SizedBox(
-                          height: 8,
-                        ),
-                        Text(
-                          '20th June, 2024',
-                          style: Theme.of(context).textTheme.titleMedium,
-                        ),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    color: Colors.black,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Image.asset('assets/images/gallery.jpg'),
-                        const SizedBox(
-                          height: 8,
-                        ),
-                        Text(
-                          '20th June, 2024',
-                          style: Theme.of(context).textTheme.titleMedium,
-                        ),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    color: Colors.black,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Image.asset('assets/images/gallery.jpg'),
-                        const SizedBox(
-                          height: 8,
-                        ),
-                        Text(
-                          '20th June, 2024',
-                          style: Theme.of(context).textTheme.titleMedium,
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
+                itemBuilder: (context, index) {
+                  final event = eventController.upcomingEvents![index];
+
+                  return eventController.previousEvents!.length == 0
+                      ? const Center(child: Text('No upcomming available'))
+                      : Container(
+                          color: Colors.black,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Image.asset('assets/images/gallery.jpg'),
+                              const SizedBox(
+                                height: 8,
+                              ),
+                              Text(
+                                event.date.toString(),
+                                style: Theme.of(context).textTheme.titleMedium,
+                              ),
+                            ],
+                          ),
+                        );
+                },
               ),
             ],
           ),
@@ -320,3 +213,54 @@ class Events extends StatelessWidget {
     );
   }
 }
+
+
+
+// Container(
+//                     color: Colors.black,
+//                     child: Column(
+//                       crossAxisAlignment: CrossAxisAlignment.start,
+//                       children: [
+//                         Image.asset('assets/images/gallery.jpg'),
+//                         const SizedBox(
+//                           height: 8,
+//                         ),
+//                         Text(
+//                           '20th June, 2024',
+//                           style: Theme.of(context).textTheme.titleMedium,
+//                         ),
+//                       ],
+//                     ),
+//                   ),
+//                   Container(
+//                     color: Colors.black,
+//                     child: Column(
+//                       crossAxisAlignment: CrossAxisAlignment.start,
+//                       children: [
+//                         Image.asset('assets/images/gallery.jpg'),
+//                         const SizedBox(
+//                           height: 8,
+//                         ),
+//                         Text(
+//                           '20th June, 2024',
+//                           style: Theme.of(context).textTheme.titleMedium,
+//                         ),
+//                       ],
+//                     ),
+//                   ),
+//                   Container(
+//                     color: Colors.black,
+//                     child: Column(
+//                       crossAxisAlignment: CrossAxisAlignment.start,
+//                       children: [
+//                         Image.asset('assets/images/gallery.jpg'),
+//                         const SizedBox(
+//                           height: 8,
+//                         ),
+//                         Text(
+//                           '20th June, 2024',
+//                           style: Theme.of(context).textTheme.titleMedium,
+//                         ),
+//                       ],
+//                     ),
+//                   ),
