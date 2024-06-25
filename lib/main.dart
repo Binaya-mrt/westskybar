@@ -6,7 +6,6 @@ import 'package:west33/admin%20screens/controller/eventController.dart';
 import 'package:west33/admin%20screens/controller/menuController.dart';
 
 import 'package:west33/USER%20SCREENS/homePage.dart';
-import 'package:west33/utils/globalErrorhandler.dart';
 
 class MyHttpoverrides extends HttpOverrides {
   @override

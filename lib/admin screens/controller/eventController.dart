@@ -5,7 +5,6 @@ import 'package:west33/admin%20screens/apis/eventService.dart';
 
 import 'package:west33/admin%20screens/models/event.dart';
 
-import 'dart:developer';
 import 'package:flutter/material.dart';
 
 class EventProvider extends ChangeNotifier {

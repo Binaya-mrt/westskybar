@@ -1,5 +1,11 @@
+import 'dart:io';
+
 import 'package:dropdown_textfield/dropdown_textfield.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:west33/admin%20screens/controller/menuController.dart';
+import 'package:west33/admin%20screens/models/menu.dart';
+import 'package:west33/utils/imagePicker.dart';
 
 class AddMenu extends StatefulWidget {
   const AddMenu({super.key});
@@ -25,6 +31,17 @@ class _AddMenuState extends State<AddMenu> {
 
   @override
   Widget build(BuildContext context) {
+    final List<String> items = ['Sittan', 'Drinks', 'Snakcs'];
+    String selectedItem = items.first;
+
+    final TextEditingController dishName = TextEditingController();
+    final TextEditingController price = TextEditingController();
+    final TextEditingController detail = TextEditingController();
+    final menuController = Provider.of<MenuProvider>(context);
+
+    File? _imageFile;
+    // price;detail
+
     double height = MediaQuery.of(context).size.height;
     const textstyleHead = TextStyle(
         fontWeight: FontWeight.w400, fontSize: 18, color: Colors.white);
@@ -77,7 +94,26 @@ class _AddMenuState extends State<AddMenu> {
                         SizedBox(
                           height: height * 0.01,
                         ),
-                        const Dropdown(),
+                        DropdownButton<String>(
+                          // Value that is initially selected (optional)
+                          value: items.first,
+                          // Dropdown items
+                          items: items.map((String value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(value),
+                            );
+                          }).toList(),
+                          // Dropdown onChanged function
+                          onChanged: (String? newValue) {
+                            // Handle dropdown value change
+                            if (newValue != null) {
+                              selectedItem = newValue; // Update selected item
+                              // print('Selected value: $newValue');
+                              // You can use newValue here to perform actions based on the selected item
+                            }
+                          },
+                        ),
                         SizedBox(
                           height: height * 0.02,
                         ),
@@ -88,8 +124,9 @@ class _AddMenuState extends State<AddMenu> {
                         SizedBox(
                           height: height * 0.01,
                         ),
-                        const Textform(
+                        Textform(
                           name: 'Enter name',
+                          controller: dishName,
                           no_of_lines: 1,
                         ),
                         SizedBox(
@@ -102,8 +139,9 @@ class _AddMenuState extends State<AddMenu> {
                         SizedBox(
                           height: height * 0.01,
                         ),
-                        const Textform(
+                        Textform(
                           name: 'Enter price',
+                          controller: price,
                           no_of_lines: 1,
                         ),
                         SizedBox(
@@ -116,9 +154,10 @@ class _AddMenuState extends State<AddMenu> {
                         SizedBox(
                           height: height * 0.01,
                         ),
-                        const Textform(
+                        Textform(
                           name: 'Enter details',
                           no_of_lines: 6,
+                          controller: detail,
                         ),
                         SizedBox(
                           height: height * 0.02,
@@ -130,22 +169,32 @@ class _AddMenuState extends State<AddMenu> {
                         SizedBox(
                           height: height * 0.01,
                         ),
-                        Container(
-                          width: double.infinity,
-                          height: height * 0.2,
-                          color: const Color(0xff4C4444),
-                          child: const Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Icon(Icons.upload, color: Color(0xffAA9F9F)),
-                              Text(
-                                'Upload a picture of the dish',
-                                style: TextStyle(
-                                    color: Color(0xffAA9F9F),
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w300),
-                              )
-                            ],
+                        GestureDetector(
+                          onTap: () async {
+                            File? pickedImage = await pickImage();
+                            if (pickedImage != null) {
+                              setState(() {
+                                _imageFile = pickedImage;
+                              });
+                            }
+                          },
+                          child: Container(
+                            width: double.infinity,
+                            height: height * 0.2,
+                            color: const Color(0xff4C4444),
+                            child: const Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(Icons.upload, color: Color(0xffAA9F9F)),
+                                Text(
+                                  'Upload a picture of the dish',
+                                  style: TextStyle(
+                                      color: Color(0xffAA9F9F),
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w300),
+                                )
+                              ],
+                            ),
                           ),
                         ),
                       ],
@@ -156,14 +205,28 @@ class _AddMenuState extends State<AddMenu> {
               // const Spacer(),
               Padding(
                 padding: const EdgeInsets.fromLTRB(10, 18, 10, 18),
-                child: Container(
-                  width: double.infinity,
-                  height: height * 0.04,
-                  decoration: BoxDecoration(
-                      color: const Color(0xffFF823C),
-                      borderRadius: BorderRadius.circular(4)),
-                  child: const Center(
-                      child: Text('Add Menu', style: textstyleHead)),
+                child: GestureDetector(
+                  onTap: () async {
+                    if (_imageFile != null) {
+                      MenuItem menu = MenuItem(
+                          name: dishName.text,
+                          category: selectedItem,
+                          price: int.parse(price.text),
+                          detail: detail.text);
+                      menuController.postMenuItems(menu, _imageFile!);
+                    } else {
+                      print('Please pick an image first');
+                    }
+                  },
+                  child: Container(
+                    width: double.infinity,
+                    height: height * 0.04,
+                    decoration: BoxDecoration(
+                        color: const Color(0xffFF823C),
+                        borderRadius: BorderRadius.circular(4)),
+                    child: const Center(
+                        child: Text('Add Menu', style: textstyleHead)),
+                  ),
                 ),
               )
             ],
@@ -178,10 +241,12 @@ class Textform extends StatelessWidget {
   const Textform({
     required this.name,
     required this.no_of_lines,
+    required this.controller,
     super.key,
   });
   final String name;
   final int no_of_lines;
+  final TextEditingController controller;
   @override
   Widget build(BuildContext context) {
     return TextFormField(
@@ -202,6 +267,7 @@ class Textform extends StatelessWidget {
           borderSide: BorderSide(color: Color(0xff6C6060)),
         ),
       ),
+      controller: controller,
     );
   }
 }

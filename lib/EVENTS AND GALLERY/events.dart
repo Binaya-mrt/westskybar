@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:west33/admin%20screens/controller/eventController.dart';
-import 'package:west33/admin%20screens/controller/menuController.dart';
 import 'package:west33/appbar.dart';
 import 'package:west33/widgets/floatingButton.dart';
 import 'package:west33/widgets/customDrawer.dart';
@@ -10,7 +9,7 @@ import 'package:west33/widgets/customDrawer.dart';
 //  THIS CONTAINS PREVIOUS AND UPCOMMING EVENTS
 
 class Events extends StatelessWidget {
-  Events({super.key});
+  const Events({super.key});
 
   // @override
   // void initState() {
@@ -101,7 +100,7 @@ class Events extends StatelessWidget {
                   itemBuilder: (context, index) {
                     final event = eventController.upcomingEvents![index];
 
-                    return eventController.allEvents!.length == 0
+                    return eventController.allEvents!.isEmpty
                         ? const Center(child: Text('No upcomming available'))
                         : Container(
                             padding: const EdgeInsets.only(
@@ -125,14 +124,14 @@ class Events extends StatelessWidget {
                                   children: [
                                     Text(
                                       event.title,
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                           fontSize: 20,
                                           fontWeight: FontWeight.w700,
                                           color: Colors.white),
                                     ),
                                     Text(
                                       event.detail,
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                           fontSize: 14,
                                           fontWeight: FontWeight.w500,
                                           color: Colors.white),
@@ -143,14 +142,14 @@ class Events extends StatelessWidget {
                                   children: [
                                     Text(
                                       event.date.toString(),
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                           fontSize: 12,
                                           fontWeight: FontWeight.w500,
                                           color: Colors.white),
                                     ),
                                     Text(
                                       'Time: ${event.time}',
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                           fontSize: 12,
                                           fontWeight: FontWeight.w500,
                                           color: Colors.white),
@@ -186,7 +185,7 @@ class Events extends StatelessWidget {
                 itemBuilder: (context, index) {
                   final event = eventController.upcomingEvents![index];
 
-                  return eventController.previousEvents!.length == 0
+                  return eventController.previousEvents!.isEmpty
                       ? const Center(child: Text('No upcomming available'))
                       : Container(
                           color: Colors.black,

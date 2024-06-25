@@ -42,7 +42,7 @@ class Home extends StatelessWidget {
               var item = menuController.menuItems![index];
               return MenuCard(
                 desc: item.detail,
-                image: URL + item.image,
+                image: URL + item.image!,
                 title: item.name,
                 fun: () {
                   navigateToPage(

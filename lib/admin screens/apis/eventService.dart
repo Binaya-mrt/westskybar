@@ -1,11 +1,9 @@
-import 'dart:developer';
 import 'dart:io';
 
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 import 'package:west33/admin%20screens/models/event.dart';
-import 'package:west33/utils/globalErrorhandler.dart';
 
 class EventApiService {
   Future<List<Event>> fetchAllEvents({String? category}) async {

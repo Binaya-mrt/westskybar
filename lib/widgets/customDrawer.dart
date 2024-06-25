@@ -128,7 +128,7 @@ class _CustomDrawerState extends State<CustomDrawer>
                 );
               } else if (item == 'EVENTS') {
                 Navigator.of(context).pushAndRemoveUntil(
-                  MaterialPageRoute(builder: (context) => Events()),
+                  MaterialPageRoute(builder: (context) => const Events()),
                   (Route route) => route.isFirst,
                 );
               } else if (item == 'WAITER') {
