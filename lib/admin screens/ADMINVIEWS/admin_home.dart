@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:west33/admin%20screens/ADMINVIEWS/add_event.dart';
 import 'package:west33/admin%20screens/ADMINVIEWS/add_menu.dart';
+import 'package:west33/admin%20screens/ADMINVIEWS/admin_all_menu.dart';
 import 'package:west33/admin%20screens/ADMINVIEWS/tableoverview.dart';
 import 'package:west33/widgets/sliderAnimation.dart';
 
@@ -13,6 +14,7 @@ class AdminHome extends StatelessWidget {
       appBar: AppBar(
         centerTitle: true,
         backgroundColor: Colors.black,
+        leading: null,
         title: Image.asset('assets/images/logo.png'),
       ),
       body: Padding(
@@ -39,10 +41,10 @@ class AdminHome extends StatelessWidget {
               shrinkWrap: true,
               children: [
                 GestureDetector(
-                  onTap: () => navigateToPage(context, const AddMenu()),
+                  onTap: () => navigateToPage(context, const AdminAllMenu()),
                   child: ListTile(
                     title: const Text(
-                      'Add Menu',
+                      'Menu',
                       style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.w500,
@@ -53,7 +55,7 @@ class AdminHome extends StatelessWidget {
                           const Color(0xffDCCDCD).withOpacity(0.27),
                       child: IconButton(
                           onPressed: () {
-                            navigateToPage(context, const AddMenu());
+                            navigateToPage(context, const AdminAllMenu());
                           },
                           icon: const Icon(
                             Icons.arrow_forward_ios,

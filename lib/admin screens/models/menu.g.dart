@@ -7,17 +7,17 @@ part of 'menu.dart';
 // **************************************************************************
 
 MenuItem _$MenuItemFromJson(Map<String, dynamic> json) => MenuItem(
-      id: json['id'] as String?,
+      id: json['_id'] as String?,
       name: json['name'] as String,
       category: json['category'] as String,
       price: (json['price'] as num).toInt(),
       detail: json['detail'] as String,
       image: json['image'] as String?,
-      isAvailable: json['isAvailable'] as bool?,
+      isAvailable: json['isAvailable'] as bool,
     );
 
 Map<String, dynamic> _$MenuItemToJson(MenuItem instance) => <String, dynamic>{
-      'id': instance.id,
+      '_id': instance.id,
       'name': instance.name,
       'category': instance.category,
       'price': instance.price,

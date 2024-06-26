@@ -6,6 +6,7 @@ part 'menu.g.dart';
 
 @JsonSerializable()
 class MenuItem {
+  @JsonKey(name: '_id')
   String? id;
   final String name;
   final String category;
@@ -13,7 +14,7 @@ class MenuItem {
   final String detail;
   String? image;
   // File? imageFile;
-  bool? isAvailable;
+  bool isAvailable;
 
   MenuItem({
     this.id,
@@ -23,7 +24,7 @@ class MenuItem {
     required this.detail,
     // this.imageFile,
     this.image,
-    this.isAvailable,
+    required this.isAvailable,
   });
 
   factory MenuItem.fromJson(Map<String, dynamic> json) =>

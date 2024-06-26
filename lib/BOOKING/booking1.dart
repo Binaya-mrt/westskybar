@@ -8,9 +8,17 @@ import 'package:west33/widgets/timepicker.dart';
 // THIS IS THE FIRST PAGE OF BOOKING PAGE
 // THIS PROVIDES USER INTERFACE TO ENTER NUMBER OF GUEST, TIME AND DATE
 
-class Book extends StatelessWidget {
+class Book extends StatefulWidget {
   Book({super.key});
-  final GlobalKey<ScaffoldState> key7 = GlobalKey(); // Create a key
+
+  @override
+  State<Book> createState() => _BookState();
+}
+
+class _BookState extends State<Book> {
+  final GlobalKey<ScaffoldState> key7 = GlobalKey();
+  // Create a key
+  DateTime selectedTime = DateTime.now();
 
   @override
   Widget build(BuildContext context) {
@@ -110,7 +118,25 @@ class Book extends StatelessWidget {
                     fontWeight: FontWeight.w500,
                     color: Color(0xffDCDADA)),
               ),
-              const TimePickerExample(),
+              GestureDetector(
+                  onTap: () async {
+                    final TimeOfDay? pickedTime = await showTimePicker(
+                      context: context,
+                      initialTime: TimeOfDay.fromDateTime(selectedTime),
+                    );
+
+                    if (pickedTime != null) {
+                      setState(() {
+                        selectedTime = DateTime(
+                            selectedTime.year,
+                            selectedTime.month,
+                            selectedTime.day,
+                            pickedTime.hour,
+                            pickedTime.minute);
+                      });
+                    }
+                  },
+                  child: TimePickerExample(selectedTime: selectedTime)),
               GestureDetector(
                 onTap: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) {

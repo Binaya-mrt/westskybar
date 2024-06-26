@@ -1,5 +1,10 @@
+import 'dart:io';
+
 import 'package:dropdown_textfield/dropdown_textfield.dart';
 import 'package:flutter/material.dart';
+import 'package:west33/utils/imagePicker.dart';
+import 'package:west33/widgets/datepicker.dart';
+import 'package:west33/widgets/timepicker.dart';
 
 class AddEvent extends StatefulWidget {
   const AddEvent({super.key});
@@ -9,23 +14,17 @@ class AddEvent extends StatefulWidget {
 }
 
 class _AddEventState extends State<AddEvent> {
-  late SingleValueDropDownController _cnt;
-
-  @override
-  void initState() {
-    _cnt = SingleValueDropDownController();
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    _cnt.dispose();
-    super.dispose();
-  }
+  // late SingleValueDropDownController _cnt;
+  File? _imageFile;
 
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
+    final TextEditingController eventName = TextEditingController();
+    final TextEditingController detail = TextEditingController();
+    // final TextEditingController price = TextEditingController();
+    DateTime selectedTime = DateTime.now();
+
     const textstyleHead = TextStyle(
         fontWeight: FontWeight.w400, fontSize: 18, color: Colors.white);
     return Scaffold(
@@ -70,41 +69,64 @@ class _AddEventState extends State<AddEvent> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text(
-                          'Category',
-                          style: textstyleHead,
-                        ),
-                        SizedBox(
-                          height: height * 0.01,
-                        ),
-                        const Dropdown(),
                         SizedBox(
                           height: height * 0.02,
                         ),
                         const Text(
-                          'Dish Name',
+                          'Event Name',
                           style: textstyleHead,
                         ),
                         SizedBox(
                           height: height * 0.01,
                         ),
-                        const Textform(
+                        Textform(
                           name: 'Enter name',
                           no_of_lines: 1,
+                          controller: eventName,
                         ),
                         SizedBox(
                           height: height * 0.02,
                         ),
                         const Text(
-                          'Price',
+                          'Date',
                           style: textstyleHead,
                         ),
                         SizedBox(
                           height: height * 0.01,
                         ),
-                        const Textform(
-                          name: 'Enter price',
-                          no_of_lines: 1,
+                        date(),
+                        SizedBox(
+                          height: height * 0.02,
+                        ),
+                        const Text(
+                          'Time',
+                          style: textstyleHead,
+                        ),
+                        SizedBox(
+                          height: height * 0.01,
+                        ),
+                        GestureDetector(
+                          onTap: () async {
+                            final TimeOfDay? pickedTime = await showTimePicker(
+                              context: context,
+                              initialTime: TimeOfDay.fromDateTime(selectedTime),
+                            );
+
+                            if (pickedTime != null) {
+                              setState(() {
+                                print(pickedTime);
+                                selectedTime = DateTime(
+                                    // selectedTime.year,
+                                    // selectedTime.month,
+                                    // selectedTime.day,
+                                    pickedTime.hour,
+                                    pickedTime.minute);
+                              });
+                            }
+                          },
+                          child: TimePickerExample(
+                            selectedTime: selectedTime,
+                          ),
                         ),
                         SizedBox(
                           height: height * 0.02,
@@ -116,36 +138,47 @@ class _AddEventState extends State<AddEvent> {
                         SizedBox(
                           height: height * 0.01,
                         ),
-                        const Textform(
+                        Textform(
                           name: 'Enter details',
                           no_of_lines: 6,
+                          controller: detail,
                         ),
                         SizedBox(
                           height: height * 0.02,
                         ),
                         const Text(
-                          'Dish Picture',
+                          'Event Poster Image',
                           style: textstyleHead,
                         ),
                         SizedBox(
                           height: height * 0.01,
                         ),
-                        Container(
-                          width: double.infinity,
-                          height: height * 0.2,
-                          color: const Color(0xff4C4444),
-                          child: const Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Icon(Icons.upload, color: Color(0xffAA9F9F)),
-                              Text(
-                                'Upload a picture of the dish',
-                                style: TextStyle(
-                                    color: Color(0xffAA9F9F),
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w300),
-                              )
-                            ],
+                        GestureDetector(
+                          onTap: () async {
+                            File? pickedImage = await pickImage();
+                            if (pickedImage != null) {
+                              setState(() {
+                                _imageFile = pickedImage;
+                              });
+                            }
+                          },
+                          child: Container(
+                            width: double.infinity,
+                            height: height * 0.2,
+                            color: const Color(0xff4C4444),
+                            child: const Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(Icons.upload, color: Color(0xffAA9F9F)),
+                                Text(
+                                  'Upload a poster of the event ',
+                                  style: TextStyle(
+                                      color: Color(0xffAA9F9F),
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w300),
+                                )
+                              ],
+                            ),
                           ),
                         ),
                       ],
@@ -154,16 +187,21 @@ class _AddEventState extends State<AddEvent> {
                 ),
               ),
               // const Spacer(),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(10, 18, 10, 18),
-                child: Container(
-                  width: double.infinity,
-                  height: height * 0.04,
-                  decoration: BoxDecoration(
-                      color: const Color(0xffFF823C),
-                      borderRadius: BorderRadius.circular(4)),
-                  child: const Center(
-                      child: Text('Add Event', style: textstyleHead)),
+              GestureDetector(
+                onTap: () {
+                  print('${selectedTime.hour}+${selectedTime.minute}');
+                },
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(10, 18, 10, 18),
+                  child: Container(
+                    width: double.infinity,
+                    height: height * 0.04,
+                    decoration: BoxDecoration(
+                        color: const Color(0xffFF823C),
+                        borderRadius: BorderRadius.circular(4)),
+                    child: const Center(
+                        child: Text('Add Event', style: textstyleHead)),
+                  ),
                 ),
               )
             ],
@@ -175,13 +213,17 @@ class _AddEventState extends State<AddEvent> {
 }
 
 class Textform extends StatelessWidget {
-  const Textform({
+  Textform({
     required this.name,
     required this.no_of_lines,
+    this.value,
+    required this.controller,
     super.key,
   });
   final String name;
   final int no_of_lines;
+  final TextEditingController controller;
+  String? value;
   @override
   Widget build(BuildContext context) {
     return TextFormField(
@@ -202,6 +244,7 @@ class Textform extends StatelessWidget {
           borderSide: BorderSide(color: Color(0xff6C6060)),
         ),
       ),
+      initialValue: value,
     );
   }
 }

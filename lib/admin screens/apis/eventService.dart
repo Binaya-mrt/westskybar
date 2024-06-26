@@ -16,7 +16,6 @@ class EventApiService {
       // } else {
       response = await http.get(Uri.parse('http://localhost:3000/api/events'));
       // }
-      print("THis is called ${response.body}");
 
       if (response.statusCode == 200) {
         List<dynamic> jsonResponse = json.decode(response.body)['events'];
