@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:west33/admin%20screens/ADMINVIEWS/admin_home.dart';
-import 'package:west33/BOOKING/booking1.dart';
+import 'package:west33/BOOKING/bookingDetail.dart';
 import 'package:west33/EVENTS%20AND%20GALLERY/events.dart';
 import 'package:west33/EVENTS%20AND%20GALLERY/gallery.dart';
 import 'package:west33/USER%20SCREENS/homePage.dart';

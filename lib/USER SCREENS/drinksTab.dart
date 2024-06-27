@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:west33/USER%20SCREENS/menu.dart';
 import 'package:west33/admin%20screens/controller/menuController.dart';
+import 'package:west33/constants.dart';
 import 'package:west33/widgets/menuCard.dart';
 import 'package:west33/widgets/sliderAnimation.dart';
 
@@ -10,7 +11,6 @@ class Drinks extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const URL = "http://localhost:3000";
     final menuController = Provider.of<MenuProvider>(context);
     final screenWidth = MediaQuery.of(context).size.width;
     menuController.fetchMenuItems(category: 'drinks');
@@ -40,7 +40,7 @@ class Drinks extends StatelessWidget {
               var item = menuController.menuItems![index];
               return MenuCard(
                 desc: item.detail,
-                image: URL + item.image!,
+                image: ImageURL + item.image!,
                 title: item.name,
                 fun: () {
                   navigateToPage(

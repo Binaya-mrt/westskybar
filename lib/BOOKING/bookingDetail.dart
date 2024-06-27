@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:west33/appbar.dart';
-import 'package:west33/BOOKING/booking2.dart';
+import 'package:west33/BOOKING/bookingTable.dart';
 import 'package:west33/widgets/customDrawer.dart';
 import 'package:west33/widgets/datepicker.dart';
 import 'package:west33/widgets/timepicker.dart';

@@ -13,7 +13,6 @@ class MenuItem {
   final int price;
   final String detail;
   String? image;
-  // File? imageFile;
   bool isAvailable;
 
   MenuItem({
@@ -22,7 +21,6 @@ class MenuItem {
     required this.category,
     required this.price,
     required this.detail,
-    // this.imageFile,
     this.image,
     required this.isAvailable,
   });
@@ -31,16 +29,4 @@ class MenuItem {
       _$MenuItemFromJson(json);
 
   Map<String, dynamic> toJson() => _$MenuItemToJson(this);
-
-  // factory MenuItem.fromJson(Map<String, dynamic> json) {
-  //   return MenuItem(
-  //     id: json['_id'],
-  //     name: json['name'],
-  //     category: json['category'],
-  //     price: json['price'],
-  //     detail: json['detail'],
-  //     image: json['image'],
-  //     isAvailable: json['isAvailable'],
-  //   );
-  // }
 }
