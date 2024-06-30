@@ -6,7 +6,7 @@ part of 'table.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-Table _$TableFromJson(Map<String, dynamic> json) => Table(
+TableModel _$TableModelFromJson(Map<String, dynamic> json) => TableModel(
       id: json['_id'] as String?,
       tableNo: (json['tableNo'] as num).toInt(),
       capacity: (json['capacity'] as num).toInt(),
@@ -16,7 +16,8 @@ Table _$TableFromJson(Map<String, dynamic> json) => Table(
       isAvailable: json['isAvailable'] as bool,
     );
 
-Map<String, dynamic> _$TableToJson(Table instance) => <String, dynamic>{
+Map<String, dynamic> _$TableModelToJson(TableModel instance) =>
+    <String, dynamic>{
       '_id': instance.id,
       'tableNo': instance.tableNo,
       'category': instance.category,

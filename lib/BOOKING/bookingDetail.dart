@@ -2,11 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:west33/appbar.dart';
 import 'package:west33/BOOKING/bookingTable.dart';
 import 'package:west33/widgets/customDrawer.dart';
-import 'package:west33/widgets/datepicker.dart';
-import 'package:west33/widgets/timepicker.dart';
-
-// THIS IS THE FIRST PAGE OF BOOKING PAGE
-// THIS PROVIDES USER INTERFACE TO ENTER NUMBER OF GUEST, TIME AND DATE
 
 class Book extends StatefulWidget {
   Book({super.key});
@@ -17,8 +12,11 @@ class Book extends StatefulWidget {
 
 class _BookState extends State<Book> {
   final GlobalKey<ScaffoldState> key7 = GlobalKey();
-  // Create a key
-  DateTime selectedTime = DateTime.now();
+  DateTime selectedDate = DateTime.now();
+  TimeOfDay selectedArrivalTime = TimeOfDay.now();
+  TimeOfDay selectedLeavingTime = TimeOfDay.now();
+  int numberOfGuests = 1;
+  String selectedFilter = "";
 
   @override
   Widget build(BuildContext context) {
@@ -61,12 +59,19 @@ class _BookState extends State<Book> {
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.01,
               ),
-              const FilterChipDisplay(),
+              FilterChipDisplay(
+                selectedFilter: selectedFilter,
+                onSelectedFilterChanged: (String filter) {
+                  setState(() {
+                    selectedFilter = filter;
+                  });
+                },
+              ),
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.02,
               ),
               const Text(
-                'Number of Guest',
+                'Number of Guests',
                 style: TextStyle(
                     fontWeight: FontWeight.w500,
                     fontSize: 20,
@@ -78,20 +83,29 @@ class _BookState extends State<Book> {
                   width: 126,
                   height: 48,
                   color: const Color(0xff292929),
-                  child: const Row(
+                  child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      Icon(
-                        Icons.remove,
-                        color: Colors.white,
+                      IconButton(
+                        icon: const Icon(Icons.remove, color: Colors.white),
+                        onPressed: () {
+                          setState(() {
+                            if (numberOfGuests > 1) numberOfGuests--;
+                          });
+                        },
                       ),
                       Text(
-                        '5',
-                        style: TextStyle(color: Colors.white, fontSize: 18),
+                        '$numberOfGuests',
+                        style:
+                            const TextStyle(color: Colors.white, fontSize: 18),
                       ),
-                      Icon(
-                        Icons.add,
-                        color: Colors.white,
+                      IconButton(
+                        icon: const Icon(Icons.add, color: Colors.white),
+                        onPressed: () {
+                          setState(() {
+                            numberOfGuests++;
+                          });
+                        },
                       )
                     ],
                   ),
@@ -107,40 +121,142 @@ class _BookState extends State<Book> {
                     fontWeight: FontWeight.w500,
                     color: Color(0xffDCDADA)),
               ),
-              const date(),
+              GestureDetector(
+                onTap: () async {
+                  final DateTime? pickedDate = await showDatePicker(
+                    context: context,
+                    initialDate: selectedDate,
+                    firstDate: DateTime.now(),
+                    lastDate: DateTime(2101),
+                  );
+                  if (pickedDate != null && pickedDate != selectedDate) {
+                    setState(() {
+                      selectedDate = pickedDate;
+                    });
+                  }
+                },
+                child: Container(
+                  margin: EdgeInsets.symmetric(horizontal: 10),
+                  decoration: BoxDecoration(
+                      border:
+                          Border.all(color: Theme.of(context).primaryColor)),
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "${selectedDate.toLocal()}".split(' ')[0],
+                        style: const TextStyle(
+                            fontSize: 18, color: Color(0xffDCDADA)),
+                      ),
+                      Icon(
+                        Icons.calendar_month,
+                        color: Colors.white,
+                      )
+                    ],
+                  ),
+                ),
+              ),
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.04,
               ),
               const Text(
-                'Time',
+                'Arrival Time',
                 style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.w500,
                     color: Color(0xffDCDADA)),
               ),
               GestureDetector(
-                  onTap: () async {
-                    final TimeOfDay? pickedTime = await showTimePicker(
-                      context: context,
-                      initialTime: TimeOfDay.fromDateTime(selectedTime),
-                    );
-
-                    if (pickedTime != null) {
-                      setState(() {
-                        selectedTime = DateTime(
-                            selectedTime.year,
-                            selectedTime.month,
-                            selectedTime.day,
-                            pickedTime.hour,
-                            pickedTime.minute);
-                      });
-                    }
-                  },
-                  child: TimePickerExample(selectedTime: selectedTime)),
+                onTap: () async {
+                  final TimeOfDay? pickedTime = await showTimePicker(
+                    context: context,
+                    initialTime: selectedArrivalTime,
+                  );
+                  if (pickedTime != null) {
+                    setState(() {
+                      selectedArrivalTime = pickedTime;
+                    });
+                  }
+                },
+                child: Container(
+                  margin: EdgeInsets.symmetric(horizontal: 10),
+                  decoration: BoxDecoration(
+                      border:
+                          Border.all(color: Theme.of(context).primaryColor)),
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 15, horizontal: 8),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "${selectedArrivalTime.format(context)}",
+                        style: const TextStyle(
+                            fontSize: 18, color: Color(0xffDCDADA)),
+                      ),
+                      Icon(
+                        Icons.punch_clock,
+                        color: Colors.white,
+                      )
+                    ],
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.04,
+              ),
+              const Text(
+                'Leaving Time',
+                style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w500,
+                    color: Color(0xffDCDADA)),
+              ),
+              GestureDetector(
+                onTap: () async {
+                  final TimeOfDay? pickedTime = await showTimePicker(
+                    context: context,
+                    initialTime: selectedLeavingTime,
+                  );
+                  if (pickedTime != null) {
+                    setState(() {
+                      selectedLeavingTime = pickedTime;
+                    });
+                  }
+                },
+                child: Container(
+                  margin: EdgeInsets.only(left: 10, right: 10, bottom: 20),
+                  decoration: BoxDecoration(
+                      border:
+                          Border.all(color: Theme.of(context).primaryColor)),
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "${selectedLeavingTime.format(context)}",
+                        style: const TextStyle(
+                            fontSize: 18, color: Color(0xffDCDADA)),
+                      ),
+                      Icon(
+                        Icons.punch_clock,
+                        color: Colors.white,
+                      )
+                    ],
+                  ),
+                ),
+              ),
               GestureDetector(
                 onTap: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return BookingTable();
+                    return BookingTable(
+                      arrivalTime: selectedArrivalTime,
+                      date: selectedDate,
+                      leavingTime: selectedLeavingTime,
+                      noOfGuest: numberOfGuests,
+                    );
                   }));
                 },
                 child: Container(
@@ -151,13 +267,15 @@ class _BookState extends State<Book> {
                       borderRadius: BorderRadius.circular(6)),
                   child: const Padding(
                     padding: EdgeInsets.only(top: 12),
-                    child: Text(
-                        textAlign: TextAlign.center,
-                        'NEXT',
-                        style: TextStyle(
-                          fontWeight: FontWeight.w500,
-                          color: Colors.white,
-                        )),
+                    child: Center(
+                      child: Text(
+                          textAlign: TextAlign.center,
+                          'NEXT',
+                          style: TextStyle(
+                            fontWeight: FontWeight.w500,
+                            color: Colors.white,
+                          )),
+                    ),
                   ),
                 ),
               ),
@@ -172,30 +290,32 @@ class _BookState extends State<Book> {
   }
 }
 
-class FilterChipDisplay extends StatefulWidget {
-  const FilterChipDisplay({super.key});
+class FilterChipDisplay extends StatelessWidget {
+  final String selectedFilter;
+  final ValueChanged<String> onSelectedFilterChanged;
 
-  @override
-  _FilterChipDisplayState createState() => _FilterChipDisplayState();
-}
-
-class _FilterChipDisplayState extends State<FilterChipDisplay> {
-  final List<String> _filters = [];
-  final Map<String, bool> _isSelected = {
-    'Breakfast': false,
-    'Lunch': false,
-    'Dinner': false,
-    'General': false,
-    'Birthday': false,
-    'Special': false,
-    'Private event': false,
-  };
+  const FilterChipDisplay({
+    super.key,
+    required this.selectedFilter,
+    required this.onSelectedFilterChanged,
+  });
 
   @override
   Widget build(BuildContext context) {
+    final Map<String, bool> _isSelected = {
+      'Breakfast': false,
+      'Lunch': false,
+      'Dinner': false,
+      'General': false,
+      'Birthday': false,
+      'Special': false,
+      'Private event': false,
+    };
+
     return Wrap(
       spacing: 10.0,
       children: _isSelected.keys.map((String name) {
+        final bool isSelected = selectedFilter == name;
         return Padding(
           padding: const EdgeInsets.symmetric(vertical: 6),
           child: ChoiceChip(
@@ -205,21 +325,14 @@ class _FilterChipDisplayState extends State<FilterChipDisplay> {
             label: Text(
               name,
               style: TextStyle(
-                color: _isSelected[name]!
+                color: isSelected
                     ? const Color(0xffF7F0F0)
                     : const Color(0xff8F8989),
               ),
             ),
-            selected: _isSelected[name]!,
+            selected: isSelected,
             onSelected: (bool selected) {
-              setState(() {
-                _isSelected[name] = selected;
-                if (selected) {
-                  _filters.add(name);
-                } else {
-                  _filters.removeWhere((String item) => item == name);
-                }
-              });
+              onSelectedFilterChanged(selected ? name : '');
             },
           ),
         );

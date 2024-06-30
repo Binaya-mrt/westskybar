@@ -1,4 +1,9 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:west33/BOOKING/APIService/bookingService.dart';
+import 'package:west33/USER%20SCREENS/home.dart';
 import 'package:west33/appbar.dart';
 import 'package:west33/USER%20SCREENS/homePage.dart';
 import 'package:west33/widgets/customDrawer.dart';
@@ -8,9 +13,60 @@ import 'package:west33/widgets/customDrawer.dart';
 
 // TODO: EDIT THE DETIALS, CANCEL BOOKING.
 
-class Confirmtable extends StatelessWidget {
-  Confirmtable({super.key});
-  final GlobalKey<ScaffoldState> _key9 = GlobalKey(); // Create a key
+class Confirmtable extends StatefulWidget {
+  Confirmtable(
+      {super.key,
+      required this.arrivalTime,
+      required this.date,
+      required this.departureTime,
+      required this.noOfGuest,
+      required this.tableId});
+  final DateTime date;
+  final String arrivalTime;
+  final String departureTime;
+  final int noOfGuest;
+  final String tableId;
+
+  @override
+  State<Confirmtable> createState() => _ConfirmtableState();
+}
+
+class _ConfirmtableState extends State<Confirmtable> {
+  final GlobalKey<ScaffoldState> _key9 = GlobalKey();
+  // Create a key
+  void makeBooking() async {
+    try {
+      final isAvailable = await createBooking(
+          tableId: widget.tableId,
+          date: widget.date,
+          arrivalTime: widget.arrivalTime,
+          departureTime: widget.departureTime,
+          guestNo: widget.noOfGuest);
+
+      log(isAvailable.toString());
+      if (isAvailable == 201) {
+        // Table is available, proceed to the next step
+        Navigator.push(context, MaterialPageRoute(builder: (context) {
+          return HomePage();
+        }));
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text(
+              '✅ Table Booked Successfully',
+              style: TextStyle(
+                  color: Colors.green,
+                  fontSize: 18,
+                  fontWeight: FontWeight.w500),
+            ),
+          ),
+        );
+      }
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Error checking table availability.')),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,6 +94,7 @@ class Confirmtable extends StatelessWidget {
                 padding: const EdgeInsets.all(16.0), // Adjust padding as needed
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Center(
                       child: Container(
@@ -59,15 +116,19 @@ class Confirmtable extends StatelessWidget {
                       style: Theme.of(context).textTheme.titleMedium,
                     ),
                     Text(
-                      'Number of guest: 5',
+                      'Number of guest: ${widget.noOfGuest}',
                       style: Theme.of(context).textTheme.titleMedium,
                     ),
                     Text(
-                      'Date: 2024-06-12',
+                      'Date: ${widget.date.day}-${widget.date.month}-${widget.date.year}',
                       style: Theme.of(context).textTheme.titleMedium,
                     ),
                     Text(
-                      'Time: 5:00 PM',
+                      'Arrival Time: ${widget.arrivalTime}',
+                      style: Theme.of(context).textTheme.titleMedium,
+                    ),
+                    Text(
+                      'Leaving Time: ${widget.departureTime}',
                       style: Theme.of(context).textTheme.titleMedium,
                     ),
                     Text(
@@ -80,22 +141,8 @@ class Confirmtable extends StatelessWidget {
                     ),
                     GestureDetector(
                       onTap: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) {
-                          return HomePage();
-                        }));
+                        makeBooking();
                         // Show Snackbar after the navigation completes
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text(
-                              '✅ Table Booked Successfully',
-                              style: TextStyle(
-                                  color: Colors.green,
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w500),
-                            ),
-                          ),
-                        );
                       },
                       child: Container(
                         width: double.infinity,

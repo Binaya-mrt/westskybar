@@ -79,25 +79,25 @@ class WaiterHome extends StatelessWidget {
                 ),
               ),
             ),
-            const Expanded(
-              child: TabBarView(
-                physics: NeverScrollableScrollPhysics(),
-                children: [
-                  Padding(
-                    padding: EdgeInsets.only(top: 8.0),
-                    child: WaiterIndoor(),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(top: 8.0),
-                    child: TableIndoor(),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(top: 8.0),
-                    child: TableIndoor(),
-                  ),
-                ],
-              ),
-            ),
+            // const Expanded(
+            //   child: TabBarView(
+            //     physics: NeverScrollableScrollPhysics(),
+            //     children: [
+            //       Padding(
+            //         padding: EdgeInsets.only(top: 8.0),
+            //         child: WaiterIndoor(),
+            //       ),
+            //       Padding(
+            //         padding: EdgeInsets.only(top: 8.0),
+            //         child: TableIndoor(),
+            //       ),
+            //       Padding(
+            //         padding: EdgeInsets.only(top: 8.0),
+            //         child: TableIndoor(),
+            //       ),
+            //     ],
+            //   ),
+            // ),
           ],
         ),
       ),
