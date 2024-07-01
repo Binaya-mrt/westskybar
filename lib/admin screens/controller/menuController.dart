@@ -1,9 +1,7 @@
-import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:west33/USER%20SCREENS/menu.dart';
 import 'package:west33/admin%20screens/apis/menuService.dart';
 import 'package:west33/admin%20screens/models/menu.dart';
 import 'package:west33/utils/globalErrorhandler.dart';
@@ -31,7 +29,7 @@ class MenuProvider extends ChangeNotifier {
         },
       );
     } catch (error) {
-      print(error);
+      // print(error);
     }
   }
 
@@ -40,11 +38,11 @@ class MenuProvider extends ChangeNotifier {
       final apiService = ApiService();
 
       _allmenuItems = await apiService.fetchAllMenuItems();
-      print(_allmenuItems);
+      // print(_allmenuItems);
 
       notifyListeners();
     } catch (error) {
-      print(error);
+      // print(error);
     }
   }
 
@@ -56,7 +54,7 @@ class MenuProvider extends ChangeNotifier {
 
       notifyListeners();
     } catch (error) {
-      print(error);
+      // print(error);
     }
   }
 
@@ -68,7 +66,7 @@ class MenuProvider extends ChangeNotifier {
 
       notifyListeners();
     } catch (error) {
-      print(error);
+      // print(error);
     }
   }
 
@@ -82,7 +80,7 @@ class MenuProvider extends ChangeNotifier {
       notifyListeners();
       return status;
     } catch (error) {
-      print(error);
+      // print(error);
     }
     return null;
   }

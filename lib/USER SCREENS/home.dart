@@ -49,6 +49,7 @@ class Home extends StatelessWidget {
                       context,
                       Menu(
                         title: 'Mocktails',
+                        item: item,
                       ));
                 },
               );

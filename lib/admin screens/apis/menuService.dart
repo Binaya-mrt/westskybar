@@ -28,7 +28,7 @@ class ApiService {
         return Right(
             jsonResponse.map((item) => MenuItem.fromJson(item)).toList());
       } else {
-        return Left('Failed to load menu items due to HTTP error');
+        return const Left('Failed to load menu items due to HTTP error');
       }
     } catch (e) {
       return Left(e.toString());
@@ -53,7 +53,7 @@ class ApiService {
       }
     } catch (e) {
       // GlobalErrorHandler().showError(e.toString());
-      print(e.toString());
+      // print(e.toString());
       rethrow; // Ensure the error is rethrown so it can be caught and handled elsewhere if needed
     }
   }
@@ -141,7 +141,7 @@ class ApiService {
         return jsonResponse.map((item) => MenuItem.fromJson(item)).toList();
       } else {
         var responseData = await response.stream.bytesToString();
-        log('Failed to load menu items: ${responseData}');
+        log('Failed to load menu items: $responseData');
         throw HttpException(
             'Failed to load menu items. Status code: ${response.statusCode}');
       }

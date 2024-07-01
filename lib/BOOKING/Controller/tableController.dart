@@ -15,7 +15,7 @@ class TableProvider extends ChangeNotifier {
 
       notifyListeners();
     } catch (error) {
-      print(error);
+      // print(error);
     }
   }
 }

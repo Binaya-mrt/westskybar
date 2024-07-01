@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
 
 import 'package:west33/constants.dart';
 import 'package:http/http.dart' as http;

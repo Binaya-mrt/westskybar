@@ -81,7 +81,7 @@ class _AddEventState extends State<AddEvent> {
                         ),
                         Textform(
                           name: 'Enter name',
-                          no_of_lines: 1,
+                          noOfLines: 1,
                           controller: eventName,
                         ),
                         SizedBox(
@@ -94,7 +94,7 @@ class _AddEventState extends State<AddEvent> {
                         SizedBox(
                           height: height * 0.01,
                         ),
-                        date(),
+                        const date(),
                         SizedBox(
                           height: height * 0.02,
                         ),
@@ -114,7 +114,7 @@ class _AddEventState extends State<AddEvent> {
 
                             if (pickedTime != null) {
                               setState(() {
-                                print(pickedTime);
+                                // print(pickedTime);
                                 selectedTime = DateTime(
                                     // selectedTime.year,
                                     // selectedTime.month,
@@ -140,7 +140,7 @@ class _AddEventState extends State<AddEvent> {
                         ),
                         Textform(
                           name: 'Enter details',
-                          no_of_lines: 6,
+                          noOfLines: 6,
                           controller: detail,
                         ),
                         SizedBox(
@@ -189,7 +189,7 @@ class _AddEventState extends State<AddEvent> {
               // const Spacer(),
               GestureDetector(
                 onTap: () {
-                  print('${selectedTime.hour}+${selectedTime.minute}');
+                  // print('${selectedTime.hour}+${selectedTime.minute}');
                 },
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(10, 18, 10, 18),
@@ -215,19 +215,19 @@ class _AddEventState extends State<AddEvent> {
 class Textform extends StatelessWidget {
   Textform({
     required this.name,
-    required this.no_of_lines,
+    required this.noOfLines,
     this.value,
     required this.controller,
     super.key,
   });
   final String name;
-  final int no_of_lines;
+  final int noOfLines;
   final TextEditingController controller;
   String? value;
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      maxLines: no_of_lines,
+      maxLines: noOfLines,
       cursorColor: const Color(0xffAA9F9F),
       style: const TextStyle(
           color: Color(0xffAA9F9F), fontSize: 16, fontWeight: FontWeight.w300),

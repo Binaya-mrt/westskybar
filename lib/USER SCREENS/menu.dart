@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:west33/admin%20screens/models/menu.dart';
 import 'package:west33/appbar.dart';
+import 'package:west33/constants.dart';
 import 'package:west33/widgets/floatingButton.dart';
 import 'package:west33/USER%20SCREENS/itempage.dart';
 import 'package:west33/widgets/customDrawer.dart';
@@ -7,8 +9,9 @@ import 'package:west33/widgets/menuCard.dart';
 import 'package:west33/widgets/sliderAnimation.dart';
 
 class Menu extends StatelessWidget {
-  Menu({super.key, required this.title});
+  Menu({super.key, required this.title, required this.item});
   final String title;
+  final MenuItem item;
 
   final GlobalKey<ScaffoldState> key2 = GlobalKey(); // Create a key
 
@@ -83,6 +86,7 @@ class Menu extends StatelessWidget {
               const SizedBox(
                 height: 14,
               ),
+              // TODO: GET product according to category
               GridView(
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: crossAxisCount,
@@ -93,51 +97,15 @@ class Menu extends StatelessWidget {
                 // physics: NeverScrollableScrollPhysics(),
                 children: [
                   MenuCard(
-                    desc: 'Elyx Vodka, Ginger, Mint, Lemon & Fever-Tree Soda',
-                    image: 'assets/images/mocktails.png',
-                    title: 'Mocktails',
+                    desc: item.detail,
+                    image: '$ImageURL${item.image}',
+                    title: item.name,
                     fun: () {
-                      navigateToPage(context, const ItemPage());
-                    },
-                  ),
-                  MenuCard(
-                    desc: 'Elyx Vodka, Ginger, Mint, Lemon & Fever-Tree Soda',
-                    image: 'assets/images/gin.png',
-                    title: 'gin',
-                    fun: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) {
-                        return Menu(
-                          title: title,
-                        );
-                      }));
-                    },
-                  ),
-                  MenuCard(
-                    desc: 'Elyx Vodka, Ginger, Mint, Lemon & Fever-Tree Soda',
-                    image: 'assets/images/wine.png',
-                    title: 'Wine',
-                    fun: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) {
-                        return Menu(
-                          title: title,
-                        );
-                      }));
-                    },
-                  ),
-                  MenuCard(
-                    desc: 'Elyx Vodka, Ginger, Mint, Lemon & Fever-Tree Soda',
-                    image: 'assets/images/mocktails.png',
-                    title: 'Mocktails',
-                    fun: () {
-                      print('Hello 1');
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) {
-                        return Menu(
-                          title: title,
-                        );
-                      }));
+                      navigateToPage(
+                          context,
+                          ItemPage(
+                            item: item,
+                          ));
                     },
                   ),
                 ],

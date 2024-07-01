@@ -26,7 +26,7 @@ class EventApiService {
       }
     } catch (e) {
       // GlobalErrorHandler().showError(e.toString());
-      print(e);
+      // print(e);
       rethrow;
       // rethrow; // Ensure the error is rethrown so it can be caught and handled elsewhere if needed
     }

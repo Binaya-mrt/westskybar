@@ -118,7 +118,7 @@ class _CustomDrawerState extends State<CustomDrawer>
                 );
               } else if (item == 'BOOK A TABLE') {
                 Navigator.of(context).pushAndRemoveUntil(
-                  MaterialPageRoute(builder: (context) => Book()),
+                  MaterialPageRoute(builder: (context) => const Book()),
                   (Route route) => route.isFirst,
                 );
               } else if (item == 'GALLERY') {

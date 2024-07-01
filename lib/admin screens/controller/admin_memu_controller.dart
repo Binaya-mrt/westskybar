@@ -4,12 +4,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:west33/admin%20screens/ADMINVIEWS/add_event.dart';
-import 'package:west33/admin%20screens/ADMINVIEWS/admin_all_menu.dart';
 import 'package:west33/admin%20screens/controller/menuController.dart';
 import 'package:west33/admin%20screens/models/menu.dart';
-import 'package:west33/constants.dart';
-import 'package:west33/utils/imagePicker.dart';
-import 'package:west33/widgets/sliderAnimation.dart';
 
 class EditMenu extends StatefulWidget {
   const EditMenu({super.key, required this.item});
@@ -57,7 +53,7 @@ class _EditMenuState extends State<EditMenu> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Text(
+            const Text(
               'Add Menu',
               style: TextStyle(
                   color: Colors.white,
@@ -110,7 +106,7 @@ class _EditMenuState extends State<EditMenu> {
                                 log(_isSwitched.toString());
                               },
                             ),
-                            Text(
+                            const Text(
                               'Available',
                               style:
                                   TextStyle(color: Colors.white, fontSize: 14),
@@ -132,7 +128,7 @@ class _EditMenuState extends State<EditMenu> {
                     Textform(
                       name: 'Enter name',
                       controller: dishName,
-                      no_of_lines: 1,
+                      noOfLines: 1,
                       value: widget.item.name,
                     ),
                     SizedBox(
@@ -148,7 +144,7 @@ class _EditMenuState extends State<EditMenu> {
                     Textform(
                       name: 'Enter price',
                       controller: price,
-                      no_of_lines: 1,
+                      noOfLines: 1,
                       value: widget.item.price.toString(),
                     ),
                     SizedBox(
@@ -163,7 +159,7 @@ class _EditMenuState extends State<EditMenu> {
                     ),
                     Textform(
                       name: 'Enter details',
-                      no_of_lines: 6,
+                      noOfLines: 6,
                       controller: detail,
                       value: widget.item.detail,
                     ),
@@ -217,7 +213,7 @@ class _EditMenuState extends State<EditMenu> {
                                       Navigator.pop(
                                           context); // Close the dialog
                                     },
-                                    child: Text('Cancel'),
+                                    child: const Text('Cancel'),
                                   ),
                                   ElevatedButton(
                                     onPressed: () async {
@@ -228,12 +224,12 @@ class _EditMenuState extends State<EditMenu> {
                                           .deleteMenuItems(widget.item.id!);
                                       Navigator.pop(context);
                                       ScaffoldMessenger.of(context)
-                                          .showSnackBar(SnackBar(
+                                          .showSnackBar(const SnackBar(
                                               content: Text(
                                                   'Item deleted successfully!')));
                                       // Optionally, show feedback to the user
                                     },
-                                    child: Text('Yes, Sure'),
+                                    child: const Text('Yes, Sure'),
                                     // Initially disable the button
                                   ),
                                 ],

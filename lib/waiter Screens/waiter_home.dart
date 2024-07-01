@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:west33/BOOKING/bookingTable.dart';
 import 'package:west33/waiter%20Screens/table_screen.dart';
 import 'package:west33/widgets/sliderAnimation.dart';
 

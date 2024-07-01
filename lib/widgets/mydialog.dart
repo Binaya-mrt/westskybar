@@ -11,6 +11,8 @@ class Mydialog extends StatefulWidget {
   State<Mydialog> createState() => _MydialogState();
 }
 
+int numberOfGuests = 1;
+
 class _MydialogState extends State<Mydialog> {
   @override
   Widget build(BuildContext context) {
@@ -50,46 +52,7 @@ class _MydialogState extends State<Mydialog> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
-                        'Extra',
-                        style: TextStyle(
-                            fontWeight: FontWeight.w500,
-                            fontSize: 20,
-                            color: Color(0xffDCDADA)),
-                      ),
-                      const Padding(
-                        padding: EdgeInsets.symmetric(vertical: 10),
-                        child: Row(
-                          children: [
-                            Icon(
-                              Icons.check_box_outline_blank,
-                              color: Color(0xff8F8989),
-                            ),
-                            Text(
-                              'Vodka Base',
-                              style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w400,
-                                  color: Color(0xff8F8989)),
-                            )
-                          ],
-                        ),
-                      ),
-                      const Padding(
-                        padding: EdgeInsets.symmetric(vertical: 10),
-                        child: Row(
-                          children: [
-                            Icon(Icons.check_box_outline_blank,
-                                color: Color(0xff8F8989)),
-                            Text('Vodka Base',
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w400,
-                                  color: Color(0xff8F8989),
-                                ))
-                          ],
-                        ),
-                      ),
+                     
                       SizedBox(
                         height: MediaQuery.of(context).size.height * 0.04,
                       ),
@@ -106,21 +69,31 @@ class _MydialogState extends State<Mydialog> {
                           width: 126,
                           height: 48,
                           color: const Color(0xff292929),
-                          child: const Row(
+                          child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
-                              Icon(
-                                Icons.remove,
-                                color: Colors.white,
+                              IconButton(
+                                icon: const Icon(Icons.remove,
+                                    color: Colors.white),
+                                onPressed: () {
+                                  setState(() {
+                                    if (numberOfGuests > 1) numberOfGuests--;
+                                  });
+                                },
                               ),
                               Text(
-                                '5',
-                                style: TextStyle(
+                                '$numberOfGuests',
+                                style: const TextStyle(
                                     color: Colors.white, fontSize: 18),
                               ),
-                              Icon(
-                                Icons.add,
-                                color: Colors.white,
+                              IconButton(
+                                icon:
+                                    const Icon(Icons.add, color: Colors.white),
+                                onPressed: () {
+                                  setState(() {
+                                    numberOfGuests++;
+                                  });
+                                },
                               )
                             ],
                           ),

@@ -1,23 +1,18 @@
-import 'dart:convert';
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:west33/BOOKING/APIService/bookingService.dart';
 import 'package:west33/BOOKING/Controller/tableController.dart';
 import 'package:west33/appbar.dart';
 import 'package:west33/BOOKING/confirmtable.dart';
-import 'package:west33/constants.dart';
 import 'package:west33/widgets/customDrawer.dart';
 import 'Model/table.dart';
-import 'package:http/http.dart' as http;
 
 // THIS IS THE FIRST PAGE OF BOOKING PAGE
 // THIS PROVIDES USER INTERFACE TO SELECT THE TABLE  AND TABBAR TO
 // DIFFERENT LOCATION OF TABLE
 
 class BookingTable extends StatefulWidget {
-  BookingTable(
+  const BookingTable(
       {super.key,
       required this.arrivalTime,
       required this.date,
@@ -44,6 +39,7 @@ class _BookingTableState extends State<BookingTable> {
     tableController.fetchAllTables();
   }
 
+  @override
   Widget build(BuildContext context) {
     final tableController = Provider.of<TableProvider>(context);
 
@@ -92,7 +88,7 @@ class _BookingTableState extends State<BookingTable> {
                     ? const Center(child: Text('No tables available'))
                     : ListView.builder(
                         shrinkWrap: true,
-                        physics: NeverScrollableScrollPhysics(),
+                        physics: const NeverScrollableScrollPhysics(),
                         itemCount: tableController.allTables!.length,
                         itemBuilder: (context, index) {
                           TableModel table = tableController.allTables![index];
@@ -119,7 +115,7 @@ class _BookingTableState extends State<BookingTable> {
                                     });
                                   } else {
                                     ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(
+                                      const SnackBar(
                                           content: Text(
                                               'Table is not available for this time')),
                                     );
@@ -127,18 +123,18 @@ class _BookingTableState extends State<BookingTable> {
                                 } catch (e) {
                                   // Handle error
                                   ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
+                                    const SnackBar(
                                         content: Text(
                                             'Error checking table availability.')),
                                   );
                                 }
-                                print(selectedTableId);
+                                // print(selectedTableId);
                               },
                               tileColor: selectedTableId == table.id!
                                   ? Colors.amber[200]
                                   : Colors.white,
                               title: Row(children: [
-                                Text('Table Number: '),
+                                const Text('Table Number: '),
                                 Text(
                                   table.tableNo.toString(),
                                   style: TextStyle(
@@ -150,7 +146,7 @@ class _BookingTableState extends State<BookingTable> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Row(children: [
-                                    Text('Table Capacity: '),
+                                    const Text('Table Capacity: '),
                                     Text(
                                       table.capacity.toString(),
                                       style: TextStyle(
@@ -159,7 +155,7 @@ class _BookingTableState extends State<BookingTable> {
                                     )
                                   ]),
                                   Row(children: [
-                                    Text('Location: '),
+                                    const Text('Location: '),
                                     Text(
                                       table.category,
                                       style: TextStyle(
@@ -174,7 +170,7 @@ class _BookingTableState extends State<BookingTable> {
                           );
                         },
                       ),
-            Spacer(),
+            const Spacer(),
             GestureDetector(
               onTap: () {
                 if (isTableAvailable) {

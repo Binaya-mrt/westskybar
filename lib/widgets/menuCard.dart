@@ -17,7 +17,7 @@ class MenuCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        print('Hello 2');
+        // print('Hello 2');
 
         fun();
       },

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:west33/admin%20screens/ADMINVIEWS/add_menu.dart';
-import 'package:west33/admin%20screens/controller/adminEditMenu.dart';
+import 'package:west33/admin%20screens/controller/admin_memu_controller.dart';
 import 'package:west33/admin%20screens/controller/menuController.dart';
 import 'package:west33/widgets/sliderAnimation.dart';
 
@@ -38,13 +38,13 @@ class _AdminAllMenuState extends State<AdminAllMenu> {
         title: Image.asset('assets/images/logo.png'),
       ),
       body: _isLoading
-          ? Center(child: CircularProgressIndicator())
+          ? const Center(child: CircularProgressIndicator())
           : menuController.allmenuItems == null ||
                   menuController.allmenuItems!.isEmpty
-              ? Center(child: Text('No menu available'))
+              ? const Center(child: Text('No menu available'))
               : Column(
                   children: [
-                    Text(
+                    const Text(
                       'All Menu',
                       textAlign: TextAlign.center,
                       style: TextStyle(color: Colors.white, fontSize: 22),
@@ -66,7 +66,7 @@ class _AdminAllMenuState extends State<AdminAllMenu> {
                               child: ListTile(
                                 title: Text(
                                   item.name,
-                                  style: TextStyle(color: Colors.white),
+                                  style: const TextStyle(color: Colors.white),
                                 ),
                                 subtitle: Text(item.detail),
                                 trailing: CircleAvatar(
@@ -88,10 +88,10 @@ class _AdminAllMenuState extends State<AdminAllMenu> {
         onPressed: () {
           navigateToPage(
             context,
-            AddMenu(),
+            const AddMenu(),
           );
         },
-        child: Icon(
+        child: const Icon(
           Icons.add,
           color: Colors.black,
         ),

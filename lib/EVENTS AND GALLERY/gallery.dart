@@ -73,7 +73,7 @@ class Gallery extends StatelessWidget {
                             initialDate: DateTime.now(),
                           );
                           if (dateTime != null) {
-                            print(dateTime);
+                            // print(dateTime);
                           }
                         },
                         icon: const Icon(

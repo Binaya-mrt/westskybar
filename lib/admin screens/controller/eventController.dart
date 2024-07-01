@@ -39,7 +39,7 @@ class EventProvider extends ChangeNotifier {
 
       notifyListeners();
     } catch (error) {
-      print(error);
+      // print(error);
     }
   }
 }

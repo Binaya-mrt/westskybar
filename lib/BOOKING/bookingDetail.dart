@@ -4,7 +4,7 @@ import 'package:west33/BOOKING/bookingTable.dart';
 import 'package:west33/widgets/customDrawer.dart';
 
 class Book extends StatefulWidget {
-  Book({super.key});
+  const Book({super.key});
 
   @override
   State<Book> createState() => _BookState();
@@ -136,7 +136,7 @@ class _BookState extends State<Book> {
                   }
                 },
                 child: Container(
-                  margin: EdgeInsets.symmetric(horizontal: 10),
+                  margin: const EdgeInsets.symmetric(horizontal: 10),
                   decoration: BoxDecoration(
                       border:
                           Border.all(color: Theme.of(context).primaryColor)),
@@ -150,7 +150,7 @@ class _BookState extends State<Book> {
                         style: const TextStyle(
                             fontSize: 18, color: Color(0xffDCDADA)),
                       ),
-                      Icon(
+                      const Icon(
                         Icons.calendar_month,
                         color: Colors.white,
                       )
@@ -181,7 +181,7 @@ class _BookState extends State<Book> {
                   }
                 },
                 child: Container(
-                  margin: EdgeInsets.symmetric(horizontal: 10),
+                  margin: const EdgeInsets.symmetric(horizontal: 10),
                   decoration: BoxDecoration(
                       border:
                           Border.all(color: Theme.of(context).primaryColor)),
@@ -191,11 +191,11 @@ class _BookState extends State<Book> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        "${selectedArrivalTime.format(context)}",
+                        selectedArrivalTime.format(context),
                         style: const TextStyle(
                             fontSize: 18, color: Color(0xffDCDADA)),
                       ),
-                      Icon(
+                      const Icon(
                         Icons.punch_clock,
                         color: Colors.white,
                       )
@@ -226,7 +226,7 @@ class _BookState extends State<Book> {
                   }
                 },
                 child: Container(
-                  margin: EdgeInsets.only(left: 10, right: 10, bottom: 20),
+                  margin: const EdgeInsets.only(left: 10, right: 10, bottom: 20),
                   decoration: BoxDecoration(
                       border:
                           Border.all(color: Theme.of(context).primaryColor)),
@@ -236,11 +236,11 @@ class _BookState extends State<Book> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        "${selectedLeavingTime.format(context)}",
+                        selectedLeavingTime.format(context),
                         style: const TextStyle(
                             fontSize: 18, color: Color(0xffDCDADA)),
                       ),
-                      Icon(
+                      const Icon(
                         Icons.punch_clock,
                         color: Colors.white,
                       )
@@ -302,7 +302,7 @@ class FilterChipDisplay extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Map<String, bool> _isSelected = {
+    final Map<String, bool> isSelected0 = {
       'Breakfast': false,
       'Lunch': false,
       'Dinner': false,
@@ -314,7 +314,7 @@ class FilterChipDisplay extends StatelessWidget {
 
     return Wrap(
       spacing: 10.0,
-      children: _isSelected.keys.map((String name) {
+      children: isSelected0.keys.map((String name) {
         final bool isSelected = selectedFilter == name;
         return Padding(
           padding: const EdgeInsets.symmetric(vertical: 6),

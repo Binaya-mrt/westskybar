@@ -1,9 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:west33/BOOKING/APIService/bookingService.dart';
-import 'package:west33/USER%20SCREENS/home.dart';
 import 'package:west33/appbar.dart';
 import 'package:west33/USER%20SCREENS/homePage.dart';
 import 'package:west33/widgets/customDrawer.dart';
@@ -14,7 +12,7 @@ import 'package:west33/widgets/customDrawer.dart';
 // TODO: EDIT THE DETIALS, CANCEL BOOKING.
 
 class Confirmtable extends StatefulWidget {
-  Confirmtable(
+  const Confirmtable(
       {super.key,
       required this.arrivalTime,
       required this.date,
@@ -63,7 +61,7 @@ class _ConfirmtableState extends State<Confirmtable> {
       }
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Error checking table availability.')),
+        const SnackBar(content: Text('Error checking table availability.')),
       );
     }
   }

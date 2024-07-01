@@ -1,7 +1,5 @@
-import 'dart:developer';
 import 'dart:io';
 
-import 'package:dropdown_textfield/dropdown_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:west33/admin%20screens/controller/menuController.dart';
@@ -122,7 +120,7 @@ class _AddMenuState extends State<AddMenu> {
                       Textform(
                         name: 'Enter name',
                         controller: dishName,
-                        no_of_lines: 1,
+                        noOfLines: 1,
                       ),
                       SizedBox(
                         height: height * 0.02,
@@ -137,7 +135,7 @@ class _AddMenuState extends State<AddMenu> {
                       Textform(
                         name: 'Enter price',
                         controller: price,
-                        no_of_lines: 1,
+                        noOfLines: 1,
                       ),
                       SizedBox(
                         height: height * 0.02,
@@ -151,7 +149,7 @@ class _AddMenuState extends State<AddMenu> {
                       ),
                       Textform(
                         name: 'Enter details',
-                        no_of_lines: 6,
+                        noOfLines: 6,
                         controller: detail,
                       ),
                       SizedBox(
@@ -213,7 +211,7 @@ class _AddMenuState extends State<AddMenu> {
                           isAvailable: true);
                       menuController.postMenuItems(menu, imageFile!);
                     } else {
-                      print('Please pick an image first');
+                      // print('Please pick an image first');
                     }
                   },
                   child: Container(
@@ -238,18 +236,18 @@ class _AddMenuState extends State<AddMenu> {
 class Textform extends StatelessWidget {
   const Textform({
     required this.name,
-    required this.no_of_lines,
+    required this.noOfLines,
     required this.controller,
     super.key,
   });
   final String name;
-  final int no_of_lines;
+  final int noOfLines;
   final TextEditingController controller;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      maxLines: no_of_lines,
+      maxLines: noOfLines,
       cursorColor: const Color(0xffAA9F9F),
       style: const TextStyle(
           color: Color(0xffAA9F9F), fontSize: 16, fontWeight: FontWeight.w300),

@@ -61,7 +61,8 @@ class _HomeState extends State<Home> {
                     navigateToPage(
                         context,
                         Menu(
-                          title: 'Mocktails',
+                          title: item.name,
+                          item: item,
                         ));
                   },
                 );
