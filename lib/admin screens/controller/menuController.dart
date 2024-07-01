@@ -2,9 +2,11 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:west33/USER%20SCREENS/menu.dart';
 import 'package:west33/admin%20screens/apis/menuService.dart';
 import 'package:west33/admin%20screens/models/menu.dart';
+import 'package:west33/utils/globalErrorhandler.dart';
 
 class MenuProvider extends ChangeNotifier {
   List<MenuItem>? _menuItems;
@@ -15,16 +17,19 @@ class MenuProvider extends ChangeNotifier {
   List<MenuItem>? get allmenuItems => _allmenuItems;
   int? response;
 
-  Future<void> fetchMenuItems({String? category}) async {
+  Future<void> fetchMenuItems(context, {String? category}) async {
     try {
-      final apiService = ApiService();
+      final apiResult = await ApiService().fetchMenuItems(category: category);
 
-      if (category != null) {
-        _menuItems = await apiService.fetchMenuItems(category: category);
-      } else {
-        _menuItems = await apiService.fetchMenuItems();
-      }
-      notifyListeners();
+      apiResult.fold(
+        (failure) {
+          showErrorDialog(context, failure);
+        },
+        (success) {
+          _menuItems = success;
+          notifyListeners();
+        },
+      );
     } catch (error) {
       print(error);
     }

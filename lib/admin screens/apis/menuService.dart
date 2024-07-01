@@ -1,6 +1,7 @@
 import 'dart:developer';
 import 'dart:io';
 
+import 'package:dartz/dartz.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -8,7 +9,8 @@ import 'package:west33/admin%20screens/models/menu.dart';
 import 'package:west33/constants.dart';
 
 class ApiService {
-  Future<List<MenuItem>> fetchMenuItems({String? category}) async {
+  Future<Either<String, List<MenuItem>>> fetchMenuItems(
+      {String? category}) async {
     try {
       http.Response response;
 
@@ -23,14 +25,13 @@ class ApiService {
 
       if (response.statusCode == 200) {
         List<dynamic> jsonResponse = json.decode(response.body)['menu'];
-        return jsonResponse.map((item) => MenuItem.fromJson(item)).toList();
+        return Right(
+            jsonResponse.map((item) => MenuItem.fromJson(item)).toList());
       } else {
-        throw const HttpException('Failed to load menu items');
+        return Left('Failed to load menu items due to HTTP error');
       }
     } catch (e) {
-      // GlobalErrorHandler().showError(e.toString());
-
-      rethrow; // Ensure the error is rethrown so it can be caught and handled elsewhere if needed
+      return Left(e.toString());
     }
   }
 

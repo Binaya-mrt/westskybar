@@ -17,7 +17,7 @@ class _HomeState extends State<Home> {
   void initState() {
     super.initState();
     final menuController = Provider.of<MenuProvider>(context, listen: false);
-    menuController.fetchMenuItems();
+    menuController.fetchMenuItems(context);
   }
 
   @override
@@ -39,7 +39,9 @@ class _HomeState extends State<Home> {
 
     return Scaffold(
       body: menuController.menuItems == null
-          ? const Center(child: CircularProgressIndicator())
+          ? const Center(
+              child: Text("No Item available"),
+            )
           : GridView.builder(
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: crossAxisCount,

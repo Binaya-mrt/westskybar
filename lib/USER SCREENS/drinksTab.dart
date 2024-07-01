@@ -13,7 +13,7 @@ class Drinks extends StatelessWidget {
   Widget build(BuildContext context) {
     final menuController = Provider.of<MenuProvider>(context);
     final screenWidth = MediaQuery.of(context).size.width;
-    menuController.fetchMenuItems(category: 'drinks');
+    menuController.fetchMenuItems(context, category: 'drinks');
 
     int crossAxisCount;
     if (screenWidth >= 1200) {
