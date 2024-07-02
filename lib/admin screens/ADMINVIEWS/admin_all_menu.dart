@@ -70,7 +70,7 @@ class _AdminAllMenuState extends State<AdminAllMenu> {
                                 ),
                                 subtitle: Text(item.detail),
                                 trailing: CircleAvatar(
-                                  backgroundColor: item.isAvailable
+                                  backgroundColor: item.isAvailable!
                                       ? Colors.green
                                       : Colors.red,
                                   child: const Icon(

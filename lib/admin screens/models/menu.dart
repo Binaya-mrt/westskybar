@@ -1,4 +1,3 @@
-
 import 'package:json_annotation/json_annotation.dart';
 
 part 'menu.g.dart';
@@ -12,7 +11,7 @@ class MenuItem {
   final int price;
   final String detail;
   String? image;
-  bool isAvailable;
+  bool? isAvailable;
 
   MenuItem({
     this.id,
@@ -21,7 +20,7 @@ class MenuItem {
     required this.price,
     required this.detail,
     this.image,
-    required this.isAvailable,
+    this.isAvailable,
   });
 
   factory MenuItem.fromJson(Map<String, dynamic> json) =>

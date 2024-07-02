@@ -94,7 +94,6 @@ class Menu extends StatelessWidget {
                     mainAxisSpacing: 10,
                     childAspectRatio: 3 / 6),
                 shrinkWrap: true,
-                // physics: NeverScrollableScrollPhysics(),
                 children: [
                   MenuCard(
                     desc: item.detail,

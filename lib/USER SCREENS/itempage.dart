@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:west33/BOOKING/APIService/cartService.dart';
 import 'package:west33/USER%20SCREENS/homePage.dart';
 import 'package:west33/admin%20screens/models/menu.dart';
 import 'package:west33/constants.dart';
@@ -15,6 +16,8 @@ class ItemPage extends StatefulWidget {
   @override
   _ItemPageState createState() => _ItemPageState();
 }
+
+int quantity = 1;
 
 class _ItemPageState extends State<ItemPage> {
   @override
@@ -121,38 +124,80 @@ class _ItemPageState extends State<ItemPage> {
                                 fontWeight: FontWeight.w400,
                                 color: Color(0xff72716D)),
                           ),
+
                           const SizedBox(height: 16),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 10.0),
+                            child: Container(
+                              width: 126,
+                              height: 48,
+                              color: const Color(0xff292929),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                children: [
+                                  IconButton(
+                                    icon: const Icon(Icons.remove,
+                                        color: Colors.white),
+                                    onPressed: () {
+                                      setState(() {
+                                        if (quantity > 1) quantity--;
+                                      });
+                                    },
+                                  ),
+                                  Text(
+                                    '$quantity',
+                                    style: const TextStyle(
+                                        color: Colors.white, fontSize: 18),
+                                  ),
+                                  IconButton(
+                                    icon: const Icon(Icons.add,
+                                        color: Colors.white),
+                                    onPressed: () {
+                                      setState(() {
+                                        quantity++;
+                                      });
+                                    },
+                                  )
+                                ],
+                              ),
+                            ),
+                          ),
                           Padding(
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 16.0, vertical: 16.0),
                             child: ElevatedButton(
-                              onPressed: () {
-                                showDialog(
-                                  context: context,
-                                  builder: (BuildContext context) => Mydialog(
-                                    onTap: () {
-                                      Navigator.of(context).pushAndRemoveUntil(
-                                        MaterialPageRoute(
-                                            builder: (context) => HomePage()),
-                                        (Route route) => route.isFirst,
-                                      );
+                              onPressed: () async {
+                                String userId = '66838b68de04dca9b9da2089';
+                                List<Map<String, dynamic>> products = [
+                                  {
+                                    "productId": widget.item.id,
+                                    "quantity": quantity,
+                                  },
+                                ];
 
-                                      // Show Snackbar after the navigation completes
-                                      ScaffoldMessenger.of(context)
-                                          .showSnackBar(
-                                        const SnackBar(
-                                          content: Text(
-                                            '✅ Order Added to cart successfully!',
-                                            style: TextStyle(
-                                                color: Colors.green,
-                                                fontSize: 18,
-                                                fontWeight: FontWeight.w500),
-                                          ),
-                                        ),
-                                      );
-                                    },
-                                  ),
-                                );
+                                int status = await CartService()
+                                    .sendCartData(userId, products);
+                                if (status == 200) {
+                                  Navigator.of(context).pushAndRemoveUntil(
+                                    MaterialPageRoute(
+                                        builder: (context) => HomePage()),
+                                    (Route route) => route.isFirst,
+                                  );
+
+                                  // Show Snackbar after the navigation completes
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                      content: Text(
+                                        '✅ Order Added to cart successfully!',
+                                        style: TextStyle(
+                                            color: Colors.green,
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.w500),
+                                      ),
+                                    ),
+                                  );
+                                }
                               },
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: const Color(

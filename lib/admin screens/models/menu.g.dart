@@ -13,7 +13,7 @@ MenuItem _$MenuItemFromJson(Map<String, dynamic> json) => MenuItem(
       price: (json['price'] as num).toInt(),
       detail: json['detail'] as String,
       image: json['image'] as String?,
-      isAvailable: json['isAvailable'] as bool,
+      isAvailable: json['isAvailable'] as bool?,
     );
 
 Map<String, dynamic> _$MenuItemToJson(MenuItem instance) => <String, dynamic>{

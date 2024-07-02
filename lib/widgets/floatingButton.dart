@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
+import 'package:west33/USER%20SCREENS/cart.dart';
 
 // Assuming you have the SpeedDial package installed
 
@@ -81,26 +82,12 @@ class CustomFloatingActionButtons extends StatelessWidget {
           SpeedDialChild(
             child: const Icon(Icons.help_outline),
             backgroundColor: Colors.green,
-            onTap: helpOnTap ??
-                (() {
-                  showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return AlertDialog(
-                        title: const Text("Tooltip 2"),
-                        content: const Text("This is the second button."),
-                        actions: <Widget>[
-                          ElevatedButton(
-                            child: const Text("Close"),
-                            onPressed: () {
-                              Navigator.of(context).pop();
-                            },
-                          ),
-                        ],
-                      );
-                    },
-                  );
-                }),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const UserCart()),
+              );
+            },
             label: 'Cart',
             labelStyle: const TextStyle(fontWeight: FontWeight.bold),
           ),

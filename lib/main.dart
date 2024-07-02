@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:west33/BOOKING/Controller/cartController.dart';
 import 'package:west33/BOOKING/Controller/tableController.dart';
 import 'package:west33/admin%20screens/controller/eventController.dart';
 import 'package:west33/admin%20screens/controller/menuController.dart';
@@ -36,6 +37,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => MenuProvider()),
         ChangeNotifierProvider(create: (context) => EventProvider()),
         ChangeNotifierProvider(create: (context) => TableProvider()),
+        ChangeNotifierProvider(create: (context) => CartProvider()),
 
         // ChangeNotifierProvider(create: (context) => UserController()),
       ],

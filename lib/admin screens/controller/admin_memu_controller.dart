@@ -30,7 +30,7 @@ class _EditMenuState extends State<EditMenu> {
     price = TextEditingController();
     detail = TextEditingController();
 
-    _isSwitched = widget.item.isAvailable;
+    _isSwitched = widget.item.isAvailable!;
     log(widget.item.id!);
     super.initState();
   }
