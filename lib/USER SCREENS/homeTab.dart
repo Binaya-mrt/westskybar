@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:west33/USER%20SCREENS/menu.dart';
 import 'package:west33/admin%20screens/controller/menuController.dart';
+import 'package:west33/constants.dart';
 import 'package:west33/widgets/menuCard.dart';
 import 'package:west33/widgets/sliderAnimation.dart';
 
@@ -22,7 +23,7 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    const URL = "http://192.168.1.111:3000";
+    // const URL = "http://192.168.1.111:3000";
     final menuController = Provider.of<MenuProvider>(context);
     final screenWidth = MediaQuery.of(context).size.width;
 
@@ -55,7 +56,7 @@ class _HomeState extends State<Home> {
                 var item = menuController.menuItems![index];
                 return MenuCard(
                   desc: item.detail,
-                  image: URL + item.image!,
+                  image: ImageURL + item.image!,
                   title: item.name,
                   fun: () {
                     navigateToPage(

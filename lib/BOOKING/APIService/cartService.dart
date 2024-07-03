@@ -62,4 +62,35 @@ class CartService {
       rethrow; // Ensure the error is rethrown so it can be caught and handled elsewhere if needed
     }
   }
+
+  Future<int> sendOrderData(
+      List<Map<String, dynamic>> products, String userId) async {
+    final url = '$URL/order';
+    log(url);
+    final headers = {"Content-Type": "application/json"};
+
+    final body = jsonEncode({"products": products, "guest": userId});
+    try {
+      final response = await http.post(
+        Uri.parse(url),
+        headers: headers,
+        body: body,
+      );
+      log(response.body);
+      log(response.statusCode.toString());
+      if (response.statusCode == 200) {
+        return response.statusCode;
+      } else {
+        print("Failed to send cart data: ${response.statusCode}");
+        return response.statusCode;
+      }
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<void> clearCart(String userId) async {
+    final url = '$URL/cart/$userId/clear-cart';
+    final response = await http.patch(Uri.parse(url));
+  }
 }
