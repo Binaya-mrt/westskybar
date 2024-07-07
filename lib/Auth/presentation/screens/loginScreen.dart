@@ -60,7 +60,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   cursorColor: Colors.white,
                   obscureText: isObsecure,
                   decoration: InputDecoration(
-                      contentPadding: EdgeInsets.only(left: 10, top: 10),
+                      contentPadding: const EdgeInsets.only(left: 10, top: 10),
                       hintText: 'Enter Password',
                       hintStyle: const TextStyle(color: Color(0xff8F8989)),
                       border: InputBorder.none,
@@ -116,8 +116,8 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
               const SizedBox(height: 10),
-              Center(
-                child: const Text(
+              const Center(
+                child: Text(
                   'Or ',
                   style: TextStyle(
                       fontSize: 16,
@@ -136,7 +136,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   width: double.infinity,
                   height: 42,
                   decoration: BoxDecoration(
-                      border: Border.all(color: Color(0xff484444)),
+                      border: Border.all(color: const Color(0xff484444)),
                       color: Colors.transparent,
                       borderRadius: BorderRadius.circular(6)),
                   child: Padding(
@@ -174,7 +174,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => Signupscreen()));
+                                builder: (context) => const Signupscreen()));
                       },
                       child: const Text(
                         'Sign Up',
@@ -213,7 +213,7 @@ class CustomFormField extends StatelessWidget {
         const SizedBox(height: 10),
         Text(
           title,
-          style: TextStyle(
+          style: const TextStyle(
               fontSize: 16, fontWeight: FontWeight.w500, color: Colors.white),
         ),
         const SizedBox(height: 10),
@@ -229,10 +229,10 @@ class CustomFormField extends StatelessWidget {
             style: const TextStyle(color: Colors.white),
             cursorColor: Colors.white,
             decoration: InputDecoration(
-              contentPadding: EdgeInsets.only(left: 10, bottom: 5),
+              contentPadding: const EdgeInsets.only(left: 10, bottom: 5),
               border: InputBorder.none,
               hintText: hint,
-              hintStyle: TextStyle(color: Color(0xff8F8989)),
+              hintStyle: const TextStyle(color: Color(0xff8F8989)),
             ),
           ),
         ),

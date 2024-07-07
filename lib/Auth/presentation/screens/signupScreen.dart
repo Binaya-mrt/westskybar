@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:west33/Auth/presentation/screens/loginScreen.dart';
 
@@ -27,7 +26,7 @@ class _SignupscreenState extends State<Signupscreen> {
               onPressed: () {
                 Navigator.pop(context);
               },
-              icon: Icon(Icons.arrow_back_ios)),
+              icon: const Icon(Icons.arrow_back_ios)),
           centerTitle: true,
           title: Image.asset('assets/images/logo.png'),
           backgroundColor: Colors.black,
@@ -61,7 +60,7 @@ class _SignupscreenState extends State<Signupscreen> {
                   controller: _phoneController,
                 ),
                 const SizedBox(height: 10),
-                Text(
+                const Text(
                   'Password',
                   style: TextStyle(
                       fontSize: 16,
@@ -82,7 +81,8 @@ class _SignupscreenState extends State<Signupscreen> {
                     cursorColor: Colors.white,
                     obscureText: isObsecure,
                     decoration: InputDecoration(
-                        contentPadding: EdgeInsets.only(left: 10, top: 10),
+                        contentPadding:
+                            const EdgeInsets.only(left: 10, top: 10),
                         hintText: 'Enter Password',
                         hintStyle: const TextStyle(color: Color(0xff8F8989)),
                         border: InputBorder.none,
@@ -99,7 +99,7 @@ class _SignupscreenState extends State<Signupscreen> {
                   ),
                 ),
                 const SizedBox(height: 10),
-                Text(
+                const Text(
                   'Confirm Password',
                   style: TextStyle(
                       fontSize: 16,
@@ -120,7 +120,8 @@ class _SignupscreenState extends State<Signupscreen> {
                     cursorColor: Colors.white,
                     obscureText: isObsecure,
                     decoration: InputDecoration(
-                        contentPadding: EdgeInsets.only(left: 10, top: 10),
+                        contentPadding:
+                            const EdgeInsets.only(left: 10, top: 10),
                         hintText: 'Re-Password',
                         hintStyle: const TextStyle(color: Color(0xff8F8989)),
                         border: InputBorder.none,
@@ -139,12 +140,14 @@ class _SignupscreenState extends State<Signupscreen> {
                 const SizedBox(height: 10),
                 GestureDetector(
                   onTap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => LoginScreen()));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const LoginScreen()));
                   },
                   child: Container(
                     width: double.infinity,
-                    margin: EdgeInsets.only(top: 20),
+                    margin: const EdgeInsets.only(top: 20),
                     height: 42,
                     decoration: BoxDecoration(
                         color: const Color(0xffC34C00),
