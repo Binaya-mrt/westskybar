@@ -5,7 +5,6 @@ import 'package:west33/BOOKING/APIService/cartService.dart';
 import 'package:west33/USER%20SCREENS/homePage.dart';
 import 'package:west33/admin%20screens/models/menu.dart';
 import 'package:west33/constants.dart';
-import 'package:west33/widgets/mydialog.dart';
 
 // THIS IS THE PRODUCT DETAIL PAGE
 

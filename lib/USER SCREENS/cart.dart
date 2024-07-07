@@ -36,11 +36,11 @@ class _UserCartState extends State<UserCart> {
   @override
   Widget build(BuildContext context) {
     final cartController = Provider.of<CartProvider>(context);
-    final GlobalKey<ScaffoldState> _key01 = GlobalKey();
+    final GlobalKey<ScaffoldState> key01 = GlobalKey();
 
     return Scaffold(
       backgroundColor: Colors.black,
-      appBar: MyAppBar(okay: _key01),
+      appBar: MyAppBar(okay: key01),
       drawer: const CustomDrawer(),
       body: SafeArea(
         child: Padding(
@@ -120,7 +120,7 @@ class _UserCartState extends State<UserCart> {
                                 },
                               ),
                             ),
-              Spacer(),
+              const Spacer(),
               if (cartController.allCarts!.isNotEmpty)
                 GestureDetector(
                   onTap: () async {
@@ -157,7 +157,7 @@ class _UserCartState extends State<UserCart> {
                     } catch (error) {
                       // Handle error here, e.g., show a snackbar with an error message
                       ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
+                        const SnackBar(
                           content: Text(
                             '❌ Failed to add order to cart!',
                             style: TextStyle(

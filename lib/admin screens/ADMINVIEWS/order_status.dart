@@ -79,14 +79,14 @@ class OrderStatus extends StatelessWidget {
                       ListTile(
                           title: Text(
                             product.productName,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 20,
                                 fontWeight: FontWeight.w500),
                           ),
                           subtitle: Text(
                             'RS. ${product.price}',
-                            style: TextStyle(
+                            style: const TextStyle(
                                 color: Color(0xffAA9F9F),
                                 fontSize: 18,
                                 fontWeight: FontWeight.w500),
@@ -98,7 +98,7 @@ class OrderStatus extends StatelessWidget {
                             child: Center(
                               child: Text(
                                 'x${product.quantity}',
-                                style: TextStyle(
+                                style: const TextStyle(
                                     color: Colors.white, fontSize: 12),
                               ),
                             ),
@@ -121,15 +121,15 @@ class OrderStatus extends StatelessWidget {
                   children: [
                     Text(
                       'Subtotal:  Rs.${totalAmount.toStringAsFixed(2)}',
-                      style: TextStyle(color: Colors.white),
+                      style: const TextStyle(color: Colors.white),
                     ),
                     Text(
                       'VAT(13%):  Rs.${vatAmount.toStringAsFixed(2)}',
-                      style: TextStyle(color: Colors.white),
+                      style: const TextStyle(color: Colors.white),
                     ),
                     Text(
                       'Total:  Rs.${subtotal.toStringAsFixed(2)}',
-                      style: TextStyle(color: Colors.white),
+                      style: const TextStyle(color: Colors.white),
                     ),
                   ],
                 ),

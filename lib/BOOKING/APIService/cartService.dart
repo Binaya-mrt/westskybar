@@ -65,7 +65,7 @@ class CartService {
 
   Future<int> sendOrderData(
       List<Map<String, dynamic>> products, String userId) async {
-    final url = '$URL/order';
+    const url = '$URL/order';
     log(url);
     final headers = {"Content-Type": "application/json"};
 

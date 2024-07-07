@@ -1,10 +1,8 @@
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:west33/admin%20screens/apis/orderService.dart';
 import 'package:west33/admin%20screens/models/order.dart';
 
-import 'package:west33/admin%20screens/models/order.dart';
 
 class OrderProvider with ChangeNotifier {
   List<TableOrder> _orders = [];
