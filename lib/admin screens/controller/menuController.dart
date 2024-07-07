@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
@@ -17,6 +18,7 @@ class MenuProvider extends ChangeNotifier {
 
   Future<void> fetchMenuItems(context, {String? category}) async {
     try {
+      log('Fetching menu of category: $category');
       final apiResult = await ApiService().fetchMenuItems(category: category);
 
       apiResult.fold(

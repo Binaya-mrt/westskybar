@@ -6,14 +6,25 @@ import 'package:west33/constants.dart';
 import 'package:west33/widgets/menuCard.dart';
 import 'package:west33/widgets/sliderAnimation.dart';
 
-class Drinks extends StatelessWidget {
+class Drinks extends StatefulWidget {
   const Drinks({super.key});
+
+  @override
+  State<Drinks> createState() => _DrinksState();
+}
+
+class _DrinksState extends State<Drinks> {
+  @override
+  void initState() {
+    super.initState();
+    final menuController = Provider.of<MenuProvider>(context, listen: false);
+    menuController.fetchMenuItems(context, category: 'drinks');
+  }
 
   @override
   Widget build(BuildContext context) {
     final menuController = Provider.of<MenuProvider>(context);
     final screenWidth = MediaQuery.of(context).size.width;
-    menuController.fetchMenuItems(context, category: 'drinks');
 
     int crossAxisCount;
     if (screenWidth >= 1200) {

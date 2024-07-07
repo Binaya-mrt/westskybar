@@ -1,27 +1,28 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:west33/admin%20screens/ADMINVIEWS/order_status.dart';
+import 'package:west33/admin%20screens/controller/orderController.dart';
 import 'package:west33/widgets/sliderAnimation.dart';
 
 class TableOverview extends StatelessWidget {
-  const TableOverview({
-    super.key,
-  });
+  const TableOverview({super.key});
 
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
+    final orderProvider = Provider.of<OrderProvider>(context, listen: false);
 
     const textstyleHead = TextStyle(
         fontWeight: FontWeight.w400, fontSize: 14, color: Colors.white);
+
     return Scaffold(
       appBar: AppBar(
-        title: Image.asset(
-          'assets/images/logo.png',
-        ),
+        title: Image.asset('assets/images/logo.png'),
         centerTitle: true,
         backgroundColor: Colors.black,
       ),
-      // backgroundColor: Colors.black,
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -32,7 +33,7 @@ class TableOverview extends StatelessWidget {
                 children: [
                   Icon(Icons.arrow_back_ios, color: Colors.white),
                   Text(
-                    'Add Menu',
+                    'Table Overview',
                     style: TextStyle(
                         color: Colors.white,
                         fontSize: 20,
@@ -44,204 +45,121 @@ class TableOverview extends StatelessWidget {
             const SizedBox(
               height: 15,
             ),
-            Table_no(
-              height: height,
-              textStyle_head: textstyleHead,
-              number: '1',
-            ),
-            const Divider(),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Container(
-                  height: 23,
-                  decoration: BoxDecoration(
-                      color: Colors.green,
-                      borderRadius: BorderRadius.circular(4)),
-                  child: const Row(
-                    children: [
-                      Icon(
-                        Icons.people,
-                        color: Colors.white,
-                      ),
-                      Text(
-                        'Waiter Status',
-                        style: TextStyle(color: Colors.white, fontSize: 16),
-                      )
-                    ],
-                  ),
-                ),
-                Container(
-                  height: 23,
-                  decoration: BoxDecoration(
-                      color: Colors.red,
-                      borderRadius: BorderRadius.circular(4)),
-                  child: const Row(
-                    children: [
-                      Icon(
-                        Icons.people,
-                        color: Colors.white,
-                      ),
-                      Text(
-                        'Bill Status',
-                        style: TextStyle(color: Colors.white, fontSize: 16),
-                      )
-                    ],
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () => navigateToPage(context, const OrderStatus()),
-                  child: Container(
-                    height: 23,
-                    decoration: BoxDecoration(
-                        color: Colors.grey,
-                        borderRadius: BorderRadius.circular(4)),
-                    child: const Row(
-                      children: [
-                        Icon(
-                          Icons.people,
-                          color: Colors.white,
-                        ),
-                        Text(
-                          'Order Status',
-                          style: TextStyle(color: Colors.white, fontSize: 16),
-                        )
-                      ],
+            FutureBuilder(
+              future: orderProvider.fetchOrders(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return Center(child: CircularProgressIndicator());
+                } else if (snapshot.hasError) {
+                  return Center(child: Text('Error: ${snapshot.error}'));
+                } else {
+                  return Expanded(
+                    child: Consumer<OrderProvider>(
+                      builder: (context, provider, child) {
+                        return ListView.builder(
+                          itemCount: provider.orders.length,
+                          itemBuilder: (context, index) {
+                            final tableOrder = provider.orders[index];
+
+                            return Column(
+                              children: [
+                                TableNo(
+                                  height: height,
+                                  textStyle_head: textstyleHead,
+                                  number: '${tableOrder.table.tableNo}',
+                                ),
+                                const Divider(),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
+                                  children: [
+                                    Container(
+                                      height: 23,
+                                      decoration: BoxDecoration(
+                                          color: tableOrder.table.waiterStatus
+                                              ? Colors.green
+                                              : Colors.red,
+                                          borderRadius:
+                                              BorderRadius.circular(4)),
+                                      child: const Row(
+                                        children: [
+                                          Icon(
+                                            Icons.people,
+                                            color: Colors.white,
+                                          ),
+                                          Text(
+                                            'Waiter Status',
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 16),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                    Container(
+                                      height: 23,
+                                      decoration: BoxDecoration(
+                                          color: tableOrder.table.billStatus
+                                              ? Colors.green
+                                              : Colors.red,
+                                          borderRadius:
+                                              BorderRadius.circular(4)),
+                                      child: const Row(
+                                        children: [
+                                          Icon(
+                                            Icons.people,
+                                            color: Colors.white,
+                                          ),
+                                          Text(
+                                            'Bill Status',
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 16),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                    GestureDetector(
+                                      onTap: () => navigateToPage(
+                                          context,
+                                          OrderStatus(
+                                            products:
+                                                tableOrder.orders[0].products,
+                                          )),
+                                      child: Container(
+                                        height: 23,
+                                        decoration: BoxDecoration(
+                                            color: Colors.grey,
+                                            borderRadius:
+                                                BorderRadius.circular(4)),
+                                        child: const Row(
+                                          children: [
+                                            Icon(
+                                              Icons.people,
+                                              color: Colors.white,
+                                            ),
+                                            Text(
+                                              'Order Status',
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 16),
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            );
+                          },
+                        );
+                      },
                     ),
-                  ),
-                ),
-              ],
+                  );
+                }
+              },
             ),
-            Table_no(
-              height: height,
-              textStyle_head: textstyleHead,
-              number: '2',
-            ),
-            const Divider(),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Container(
-                  height: 23,
-                  decoration: BoxDecoration(
-                      color: Colors.green,
-                      borderRadius: BorderRadius.circular(4)),
-                  child: const Row(
-                    children: [
-                      Icon(
-                        Icons.people,
-                        color: Colors.white,
-                      ),
-                      Text(
-                        'Waiter Status',
-                        style: TextStyle(color: Colors.white, fontSize: 16),
-                      )
-                    ],
-                  ),
-                ),
-                Container(
-                  height: 23,
-                  decoration: BoxDecoration(
-                      color: Colors.red,
-                      borderRadius: BorderRadius.circular(4)),
-                  child: const Row(
-                    children: [
-                      Icon(
-                        Icons.people,
-                        color: Colors.white,
-                      ),
-                      Text(
-                        'Bill Status',
-                        style: TextStyle(color: Colors.white, fontSize: 16),
-                      )
-                    ],
-                  ),
-                ),
-                Container(
-                  height: 23,
-                  decoration: BoxDecoration(
-                      color: Colors.grey,
-                      borderRadius: BorderRadius.circular(4)),
-                  child: const Row(
-                    children: [
-                      Icon(
-                        Icons.people,
-                        color: Colors.white,
-                      ),
-                      Text(
-                        'Order Status',
-                        style: TextStyle(color: Colors.white, fontSize: 16),
-                      )
-                    ],
-                  ),
-                ),
-              ],
-            ),
-            Table_no(
-              height: height,
-              textStyle_head: textstyleHead,
-              number: '3',
-            ),
-            const Divider(),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Container(
-                  height: 23,
-                  decoration: BoxDecoration(
-                      color: Colors.green,
-                      borderRadius: BorderRadius.circular(4)),
-                  child: const Row(
-                    children: [
-                      Icon(
-                        Icons.people,
-                        color: Colors.white,
-                      ),
-                      Text(
-                        'Waiter Status',
-                        style: TextStyle(color: Colors.white, fontSize: 16),
-                      )
-                    ],
-                  ),
-                ),
-                Container(
-                  height: 23,
-                  decoration: BoxDecoration(
-                      color: Colors.red,
-                      borderRadius: BorderRadius.circular(4)),
-                  child: const Row(
-                    children: [
-                      Icon(
-                        Icons.people,
-                        color: Colors.white,
-                      ),
-                      Text(
-                        'Bill Status',
-                        style: TextStyle(color: Colors.white, fontSize: 16),
-                      )
-                    ],
-                  ),
-                ),
-                Container(
-                  height: 23,
-                  decoration: BoxDecoration(
-                      color: Colors.grey,
-                      borderRadius: BorderRadius.circular(4)),
-                  child: const Row(
-                    children: [
-                      Icon(
-                        Icons.people,
-                        color: Colors.white,
-                      ),
-                      Text(
-                        'Order Status',
-                        style: TextStyle(color: Colors.white, fontSize: 16),
-                      )
-                    ],
-                  ),
-                ),
-              ],
-            )
           ],
         ),
       ),
@@ -249,8 +167,8 @@ class TableOverview extends StatelessWidget {
   }
 }
 
-class Table_no extends StatelessWidget {
-  const Table_no(
+class TableNo extends StatelessWidget {
+  const TableNo(
       {super.key,
       required this.height,
       required this.textStyle_head,

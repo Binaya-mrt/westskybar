@@ -1,5 +1,4 @@
 import 'package:west33/BOOKING/APIService/cartService.dart';
-import 'package:west33/BOOKING/APIService/tableService.dart';
 
 import 'package:flutter/material.dart';
 import 'package:west33/BOOKING/Model/cart.dart';
@@ -16,6 +15,7 @@ class CartProvider extends ChangeNotifier {
     notifyListeners();
     try {
       final apiService = CartService();
+      _allCart = [];
       _allCart = await apiService.fetchCart(userId: userId);
 
       notifyListeners();

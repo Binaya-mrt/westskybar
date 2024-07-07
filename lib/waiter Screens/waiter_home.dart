@@ -134,7 +134,7 @@ class WaiterIndoor extends StatelessWidget {
         children: [
           GestureDetector(
             onTap: () {
-              navigateToPage(context, const TableOrder());
+              navigateToPage(context, const TableOrders());
             },
             child: Container(
               height: 30,

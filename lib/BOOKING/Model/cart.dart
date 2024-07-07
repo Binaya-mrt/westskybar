@@ -7,10 +7,10 @@ part 'cart.g.dart';
 @JsonSerializable()
 class Cart {
   @JsonKey(name: '_id')
-  String id;
+  String? id;
 
   @JsonKey(name: 'productId')
-  MenuItem product;
+  MenuItem? product;
 
   int quantity;
 

@@ -13,6 +13,7 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final menuController = Provider.of<MenuProvider>(context);
+    menuController.fetchMenuItems(context);
     final screenWidth = MediaQuery.of(context).size.width;
 
     // Calculate the number of columns based on screen width

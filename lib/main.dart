@@ -8,6 +8,7 @@ import 'package:west33/admin%20screens/controller/eventController.dart';
 import 'package:west33/admin%20screens/controller/menuController.dart';
 
 import 'package:west33/USER%20SCREENS/homePage.dart';
+import 'package:west33/admin%20screens/controller/orderController.dart';
 
 class MyHttpoverrides extends HttpOverrides {
   @override
@@ -38,6 +39,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => EventProvider()),
         ChangeNotifierProvider(create: (context) => TableProvider()),
         ChangeNotifierProvider(create: (context) => CartProvider()),
+        ChangeNotifierProvider(create: (_) => OrderProvider()),
 
         // ChangeNotifierProvider(create: (context) => UserController()),
       ],

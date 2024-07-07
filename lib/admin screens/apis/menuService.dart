@@ -12,6 +12,8 @@ class ApiService {
   Future<Either<String, List<MenuItem>>> fetchMenuItems(
       {String? category}) async {
     try {
+      log('Fetching menu of category: $category');
+
       http.Response response;
 
       if (category != null) {

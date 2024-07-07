@@ -4,8 +4,8 @@ import 'package:west33/waiter%20Screens/order_summary.dart';
 
 ///
 /// ON CLICKING IT WILL NAVIGATE TO SIMPLE MENU PAGE, WHERE HE CAN SELCTS THE ORDER.
-class TableOrder extends StatelessWidget {
-  const TableOrder({super.key});
+class TableOrders extends StatelessWidget {
+  const TableOrders({super.key});
 
   @override
   Widget build(BuildContext context) {

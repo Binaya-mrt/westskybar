@@ -27,7 +27,7 @@ class _UserCartState extends State<UserCart> {
   List<Map<String, dynamic>> prepareCartData(List<Cart> carts) {
     return carts.map((cart) {
       return {
-        'productId': cart.product.id,
+        'productId': cart.product!.id,
         'quantity': cart.quantity,
       };
     }).toList();
@@ -67,9 +67,18 @@ class _UserCartState extends State<UserCart> {
               cartController.isLoading
                   ? const Center(child: CircularProgressIndicator())
                   : cartController.allCarts == null
-                      ? const Center(child: Text('Your cart is empty'))
+                      ? const Center(
+                          child: Text(
+                          'Your cart is empty',
+                          style: TextStyle(color: Colors.white, fontSize: 14),
+                        ))
                       : cartController.allCarts!.isEmpty
-                          ? const Center(child: Text('No tables available'))
+                          ? const Center(
+                              child: Text(
+                              'Your Cart is Empty!',
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 14),
+                            ))
                           : Expanded(
                               child: ListView.builder(
                                 itemCount: cartController.allCarts!.length,
@@ -83,7 +92,7 @@ class _UserCartState extends State<UserCart> {
                                       title: Row(children: [
                                         Text('Item: ${index + 1} '),
                                         Text(
-                                          table.product.name,
+                                          table.product!.name,
                                           style: TextStyle(
                                             color:
                                                 Theme.of(context).primaryColor,
@@ -112,71 +121,74 @@ class _UserCartState extends State<UserCart> {
                               ),
                             ),
               Spacer(),
-              GestureDetector(
-                onTap: () async {
-                  List<Cart> carts = cartController.allCarts ?? [];
-                  List<Map<String, dynamic>> cartData = prepareCartData(carts);
+              if (cartController.allCarts!.isNotEmpty)
+                GestureDetector(
+                  onTap: () async {
+                    List<Cart> carts = cartController.allCarts ?? [];
+                    List<Map<String, dynamic>> cartData =
+                        prepareCartData(carts);
 
-                  try {
-                    int status = await CartService().sendOrderData(
-                      cartData,
-                      '66838b68de04dca9b9da2089',
-                    );
-                    if (status == 200) {
-                      await CartService().clearCart("66838b68de04dca9b9da2089");
-                      Navigator.of(context).pushAndRemoveUntil(
-                        MaterialPageRoute(builder: (context) => HomePage()),
-                        (Route route) => route.isFirst,
+                    try {
+                      int status = await CartService().sendOrderData(
+                        cartData,
+                        '66838b68de04dca9b9da2089',
                       );
+                      if (status == 201) {
+                        await CartService()
+                            .clearCart("66838b68de04dca9b9da2089");
+                        Navigator.of(context).pushAndRemoveUntil(
+                          MaterialPageRoute(builder: (context) => HomePage()),
+                          (Route route) => route.isFirst,
+                        );
 
-                      // Show Snackbar after the navigation completes
+                        // Show Snackbar after the navigation completes
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text(
+                              '✅ Order Added to cart successfully!',
+                              style: TextStyle(
+                                  color: Colors.green,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w500),
+                            ),
+                          ),
+                        );
+                      }
+                    } catch (error) {
+                      // Handle error here, e.g., show a snackbar with an error message
                       ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
+                        SnackBar(
                           content: Text(
-                            '✅ Order Added to cart successfully!',
+                            '❌ Failed to add order to cart!',
                             style: TextStyle(
-                                color: Colors.green,
+                                color: Colors.red,
                                 fontSize: 18,
                                 fontWeight: FontWeight.w500),
                           ),
                         ),
                       );
                     }
-                  } catch (error) {
-                    // Handle error here, e.g., show a snackbar with an error message
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text(
-                          '❌ Failed to add order to cart!',
-                          style: TextStyle(
-                              color: Colors.red,
-                              fontSize: 18,
-                              fontWeight: FontWeight.w500),
-                        ),
+                  },
+                  child: Container(
+                    width: double.infinity,
+                    height: MediaQuery.of(context).size.height * 0.05,
+                    decoration: BoxDecoration(
+                        color: const Color(0xffC34C00),
+                        borderRadius: BorderRadius.circular(6)),
+                    child: const Padding(
+                      padding: EdgeInsets.only(top: 12),
+                      child: Center(
+                        child: Text(
+                            textAlign: TextAlign.center,
+                            'Order',
+                            style: TextStyle(
+                              fontWeight: FontWeight.w500,
+                              color: Colors.white,
+                            )),
                       ),
-                    );
-                  }
-                },
-                child: Container(
-                  width: double.infinity,
-                  height: MediaQuery.of(context).size.height * 0.05,
-                  decoration: BoxDecoration(
-                      color: const Color(0xffC34C00),
-                      borderRadius: BorderRadius.circular(6)),
-                  child: const Padding(
-                    padding: EdgeInsets.only(top: 12),
-                    child: Center(
-                      child: Text(
-                          textAlign: TextAlign.center,
-                          'Order',
-                          style: TextStyle(
-                            fontWeight: FontWeight.w500,
-                            color: Colors.white,
-                          )),
                     ),
                   ),
                 ),
-              ),
             ],
           ),
         ),
