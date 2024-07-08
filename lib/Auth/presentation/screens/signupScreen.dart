@@ -192,17 +192,17 @@ class _SignupscreenState extends State<Signupscreen> {
                                           builder: (context) =>
                                               const LoginScreen()));
                                   ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(
+                                      const SnackBar(
                                           content: Text(
                                               'User created successfully!')));
                                 } else if (response == 409) {
                                   ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(
+                                      const SnackBar(
                                           content: Text(
                                               'User with this email already exists')));
                                 } else {
                                   ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(
+                                      const SnackBar(
                                           content: Text(
                                               'Oops! Somthing went wrong!')));
                                 }

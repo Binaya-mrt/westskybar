@@ -43,32 +43,34 @@ class _HomeState extends State<Home> {
           ? const Center(
               child: Text("No Item available"),
             )
-          : GridView.builder(
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: crossAxisCount,
-                  crossAxisSpacing: 10,
-                  mainAxisSpacing: 10,
-                  childAspectRatio: 3 / 6),
-              shrinkWrap: true,
-              itemCount:
-                  menuController.menuItems!.length, // total number of items
-              itemBuilder: (context, index) {
-                var item = menuController.menuItems![index];
-                return MenuCard(
-                  desc: item.detail,
-                  image: ImageURL + item.image!,
-                  title: item.name,
-                  fun: () {
-                    navigateToPage(
-                        context,
-                        Menu(
-                          title: item.name,
-                          item: item,
-                        ));
+          : menuController.menuItems!.isEmpty
+              ? const Center(child: Text("No Item available"))
+              : GridView.builder(
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: crossAxisCount,
+                      crossAxisSpacing: 10,
+                      mainAxisSpacing: 10,
+                      childAspectRatio: 3 / 6),
+                  shrinkWrap: true,
+                  itemCount:
+                      menuController.menuItems!.length, // total number of items
+                  itemBuilder: (context, index) {
+                    var item = menuController.menuItems![index];
+                    return MenuCard(
+                      desc: item.detail,
+                      image: ImageURL + item.image!,
+                      title: item.name,
+                      fun: () {
+                        navigateToPage(
+                            context,
+                            Menu(
+                              title: item.name,
+                              item: item,
+                            ));
+                      },
+                    );
                   },
-                );
-              },
-            ),
+                ),
     );
   }
 }

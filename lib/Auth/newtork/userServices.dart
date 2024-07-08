@@ -7,7 +7,6 @@ import 'package:http/http.dart';
 import 'package:west33/Auth/models/userModel.dart';
 import 'package:west33/constants.dart';
 
-import "package:shared_preferences/shared_preferences.dart";
 
 // write a function to create user using post request
 class Userservices {

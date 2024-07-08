@@ -122,7 +122,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               }
                             } else {
                               ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
+                                  const SnackBar(
                                       content:
                                           Text('Oops! Somthing went wrong!')));
                             }

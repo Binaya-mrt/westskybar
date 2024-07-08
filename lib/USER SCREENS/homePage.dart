@@ -123,3 +123,14 @@ class HomePage extends StatelessWidget {
     );
   }
 }
+
+
+
+
+// add category and sub category in admin panel
+// TODO: Add category in HomePage.dart
+// search in backend
+// payment integartion
+// notification on order, booking, waiter call and bill ask
+// closable ads on the initial loading
+// 
