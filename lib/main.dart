@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:west33/Auth/presentation/screens/loginScreen.dart';
 import 'package:west33/Auth/presentation/screens/profileScreen.dart';
 import 'package:west33/BOOKING/Controller/cartController.dart';
 import 'package:west33/BOOKING/Controller/tableController.dart';
@@ -58,7 +59,7 @@ class MyApp extends StatelessWidget {
                 fontWeight: FontWeight.w400),
           ),
         ),
-        home: const ProfileScreen(),
+        home: const LoginScreen(),
       ),
     );
   }

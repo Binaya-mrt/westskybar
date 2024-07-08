@@ -96,8 +96,10 @@ class ChangepasswordScreen extends StatelessWidget {
               const SizedBox(height: 10),
               GestureDetector(
                 onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => const LoginScreen()));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const LoginScreen()));
                 },
                 child: Container(
                   width: double.infinity,
